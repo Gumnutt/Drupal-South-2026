@@ -1,0 +1,33 @@
+---
+id: "15"
+title: "Anchor Positioning: The Solution"
+---
+
+<div class="code-slide">
+  <div class="code-slide__header">
+    <p class="label">The solution</p>
+    <h1>No Popper. No floating-ui. Just CSS.</h1>
+    <p>Name the anchor, attach the popover, tell it where to sit.</p>
+  </div>
+  <div class="code-slide__code">
+
+```css
+.card-info-btn {
+  anchor-name: --card-anchor;
+}
+
+.card-popover {
+  position: absolute;
+  position-anchor: --card-anchor;
+  position-area: top center;
+  margin-bottom: 0.5rem;
+
+  /* Fallback if it doesn't fit above */
+  position-try-fallbacks: flip-block;
+}
+```
+
+  </div>
+</div>
+
+{/* Demo: <CardGridStage5 /> */}

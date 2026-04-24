@@ -1,0 +1,32 @@
+---
+import IntroLayout from '../layouts/IntroLayout.astro';
+import IntroNavigation from '../components/IntroNav.astro';
+import Slide from '../components/Slide.astro';
+import qrcode from '../images/qrcode.svg?raw';
+
+
+title: 'house keeping'
+---
+
+<IntroLayout title="Welcome to Astro." backgroundColor='hsl(260 97% 6%)'>
+  <Slide transition='circleGrow'>
+    <section class="entry fullwidth">
+      <div class="container">
+        <div class="entryscreen">
+          <div class="layout-grid double">
+            <section>
+              <Fragment set:html={qrcode} />
+            </section>
+            <section>
+              <h2>Lets have some fun.</h2>
+              <p>Celebrate with me as we look and some awesome CSS. Scan the QR code and press away.</p>
+              <p>From here on out we are taking css out for a spin. Every animation(yes the page transition, kind of), every small detail is done in CSS.</p>
+              <p>So lets have some fun and see what we can do with CSS.</p>
+            </section>
+          </div>
+        </div>
+      </div>
+    </section>
+    <IntroNavigation prev="/" next="/about" />
+  </Slide>
+</IntroLayout>

@@ -1,0 +1,56 @@
+@property --grad-rotation {
+  inherits: false;
+  initial-value: 0deg;
+  syntax: "<angle>";
+}
+
+html {
+  font-family: "Geist", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+code {
+  font-family: "GeistMono", monospace;
+}
+p,
+li {
+  max-width: var(--copy-max-width);
+  line-height: 1.5;
+  & > code {
+    --code-block-padding: 0.2rem;
+    padding: var(--code-block-padding) calc(var(--code-block-padding) * 2);
+  }
+}
+
+.astro-code {
+  --code-spacer: 2rem;
+  --code-border-width: 4px;
+  --code-block-padding: 1rem;
+  position: relative;
+  overflow-x: unset !important;
+  border: var(--code-border-width) solid hsl(207, 35%, 19%);
+  padding: var(--code-block-padding);
+  margin-block: 0;
+}
+
+.label{
+  font-family: var(--font-mono);
+}
+
+.hero-text {
+  -webkit-text-stroke: 3px var(--color-navy);                                                                                                                                                                                                                                                                                                                                                                                                                                            
+  text-shadow:                                            
+    4px 4px 0 var(--color-navy),                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+    8px 8px 0 oklch(15% 0.05 260);
+}
+
+.subtitle{
+  --fs-min: 48px;
+  --fs-max: 96px;
+  font-family: var(--font-display);
+  color: var(--color-yellow);
+}
+
+.text-sticker{
+  -webkit-text-stroke: 3px var(--color-navy); 
+  text-shadow: var(--text-sticker);
+}

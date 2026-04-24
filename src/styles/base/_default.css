@@ -1,0 +1,22 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background-color: var(--bg-color);
+}
+
+:root{
+  --display-height: calc(100dvh - var(--header-height, 63px) - var(--footer-height, 38px));
+}
+
+.fullwidth {
+  grid-column: 1/-1 !important;
+}
+
+.split{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+}

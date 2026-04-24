@@ -1,0 +1,8 @@
+---
+import { customSlide } from '../scripts/utils/transitions'
+
+const { transition, background } = Astro.props
+---
+<section class="slide container" transition:animate={transition ?? customSlide} data-background={background}>
+  <slot />
+</section>

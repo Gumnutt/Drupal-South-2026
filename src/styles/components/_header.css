@@ -1,0 +1,24 @@
+.hide-header-title header h1 {
+  visibility: hidden;
+}
+
+header{
+  position: fixed;
+  z-index: calc(infinity + 1);
+  top: 0;
+  border-bottom: 1px solid var(--light-grey);
+  width: 100%;
+  padding-block: 1rem;
+  .container > *{
+    grid-column: feature;
+  }
+  h1{
+    --fs-min: 24px;
+    --fs-max: 30px;
+    margin: 0;
+    font-family: var(--font-mono);
+    line-height: 1;
+    color: var(--dark-grey);
+    text-wrap: pretty;
+  }
+}

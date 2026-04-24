@@ -1,0 +1,38 @@
+---
+id: "13"
+title: "View Transitions: The Solution"
+---
+
+<div class="code-slide">
+  <div class="code-slide__header">
+    <p class="label">The solution</p>
+    <h1>Name the element. The browser figures out the rest.</h1>
+    <p>Give the card and its detail view the same <code>view-transition-name</code>. That's it.</p>
+  </div>
+  <div class="code-slide__code">
+
+```css
+/* On the card */
+.card {
+  view-transition-name: var(--card-id);
+}
+
+/* On the detail page */
+.card-detail {
+  view-transition-name: var(--card-id);
+}
+
+/* Optional: customise the transition */
+::view-transition-old(root) {
+  animation: slide-out 0.3s ease both;
+}
+
+::view-transition-new(root) {
+  animation: slide-in 0.3s ease both;
+}
+```
+
+  </div>
+</div>
+
+{/* Demo: <CardGridStage4 /> */}

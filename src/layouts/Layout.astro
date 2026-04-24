@@ -1,0 +1,111 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import Navigation from '../components/Navigation.astro';
+import Header from '../components/Header.astro';
+
+import '../styles/main.css';
+
+interface Props {
+	title: string;
+	backgroundColor?: string;
+	fullscreen?: boolean;
+}
+
+const { title, backgroundColor, fullscreen } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Astro description" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&family=Black+Han+Sans&family=Matemasie&family=Modak&family=Bagel+Fat+One&family=Cherry+Bomb+One&display=swap" rel="stylesheet">
+		<ClientRouter />
+	</head>
+	<body class={fullscreen ? 'hide-header-title' : ''}>
+		<Header />
+		<slot />
+		<Navigation />
+
+		<!-- SVG filter definitions -->
+		<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute;overflow:hidden">
+			<defs>
+				<!--
+					Rounded sticker outline effect.
+					Technique: dilate → blur (rounds corners) → feColorMatrix threshold (snaps back to crisp edges)
+					Adjust stdDeviation to control roundness; adjust the last feColorMatrix row to control edge crispness.
+				-->
+				<filter id="outline-sticker" x="-15%" y="-15%" width="130%" height="130%" color-interpolation-filters="sRGB">
+					<!-- Outer ring -->
+					<feMorphology in="SourceAlpha" operator="dilate" radius="9" result="dilate-outer"/>
+					<feGaussianBlur in="dilate-outer" stdDeviation="1" result="blur-outer"/>
+					<feColorMatrix in="blur-outer" type="matrix"
+						values="1 0 0 0 0
+								0 1 0 0 0
+								0 0 1 0 0
+								0 0 0 60 -28"
+						result="threshold-outer"/>
+					<feFlood flood-color="oklch(20% 0.08 260)" result="color-outer"/>
+					<feComposite in="color-outer" in2="threshold-outer" operator="in" result="outline-outer"/>
+
+					<!-- Inner ring -->
+					<feMorphology in="SourceAlpha" operator="dilate" radius="3" result="dilate-inner"/>
+					<feGaussianBlur in="dilate-inner" stdDeviation="0.5" result="blur-inner"/>
+					<feColorMatrix in="blur-inner" type="matrix"
+						values="1 0 0 0 0
+								0 1 0 0 0
+								0 0 1 0 0
+								0 0 0 60 -28"
+						result="threshold-inner"/>
+					<feFlood flood-color="#fefaf0" result="color-inner"/>
+					<feComposite in="color-inner" in2="threshold-inner" operator="in" result="outline-inner"/>
+
+					<feMerge>
+						<feMergeNode in="outline-outer"/>
+						<feMergeNode in="outline-inner"/>
+						<feMergeNode in="SourceGraphic"/>
+					</feMerge>
+				</filter>
+			</defs>
+		</svg>
+	</body>
+</html>
+<script>
+	function getScrollPercentage() {
+		let scrollTop = document.documentElement.scrollTop;
+		let scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+		let scrollPercentage = (scrollTop / scrollHeight) * 100;
+		return scrollPercentage;
+	}
+	function measureHeaderHeight() {
+		const header = document.querySelector("header")
+		if (!header) return
+		const headerHeight = header.offsetHeight
+		document.documentElement.style.setProperty("--header-height", `${headerHeight}px`)
+	}
+	function measureFooterHeight() {
+		const footer = document.querySelector("footer")
+		if (!footer) return
+		const footerHeight = footer.offsetHeight
+		document.documentElement.style.setProperty("--footer-height", `${footerHeight}px`)
+	}
+	window.addEventListener('scroll', () => {
+		document.documentElement.style.setProperty('--scroll-pos', getScrollPercentage().toFixed(2));
+	})
+	window.addEventListener("resize", () => {
+		measureHeaderHeight()
+		measureFooterHeight()
+	})
+</script>
+<style is:global>
+	html, body{
+		margin: 0;
+		padding: 0;
+	}
+</style>

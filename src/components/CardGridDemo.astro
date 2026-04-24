@@ -1,0 +1,405 @@
+---
+const features = [
+  // layout
+  { id: 1,  title: "Container Queries",      category: "layout",    emoji: "📦", desc: "Cards that respond to their container, not the viewport.",         detail: "@container lets each card adapt its layout based on the space it's given — not a global breakpoint." },
+  { id: 5,  title: "Anchor Positioning",     category: "layout",    emoji: "📌", desc: "This popover knows where its trigger is. No Popper.js.",           detail: "anchor-name and position-anchor tether an element to another element — no JavaScript needed." },
+  { id: 7,  title: "Subgrid",               category: "layout",    emoji: "🔲", desc: "Child grids that align to their parent's tracks.",                 detail: "grid-template-columns: subgrid lets nested elements participate in the outer grid's column tracks." },
+  { id: 8,  title: "Masonry Layout",         category: "layout",    emoji: "🧱", desc: "Pinterest-style layouts, no JavaScript library needed.",           detail: "grid-template-rows: masonry packs items into the shortest column. Currently behind a flag in Firefox." },
+  { id: 9,  title: "Logical Properties",     category: "layout",    emoji: "↔️", desc: "Layout that adapts to writing direction automatically.",           detail: "margin-inline, padding-block, border-inline-start — directional-agnostic spacing that works in any language." },
+  { id: 10, title: "aspect-ratio",           category: "layout",    emoji: "📐", desc: "Lock an element's ratio without padding hacks.",                   detail: "aspect-ratio: 16 / 9 replaces the old percentage-padding trick. The browser does the maths." },
+  { id: 11, title: "fit-content()",          category: "layout",    emoji: "📏", desc: "Columns that shrink to content but never overflow.",               detail: "fit-content() in grid-template-columns sizes a track to its content up to a given maximum." },
+  { id: 12, title: "Flexbox gap",            category: "layout",    emoji: "↕️", desc: "Space between flex items without margin hacks.",                   detail: "gap works in flexbox just like in grid — no more :not(:last-child) margin tricks." },
+  { id: 13, title: "min() / max() / clamp()", category: "layout",   emoji: "🎚️", desc: "Fluid sizing without media queries.",                              detail: "clamp(1rem, 3vw, 2rem) sets a responsive value with a hard floor and ceiling — one line of CSS." },
+  { id: 14, title: "content-visibility",     category: "layout",    emoji: "👁️", desc: "Skip rendering off-screen content for faster paint.",             detail: "content-visibility: auto tells the browser to skip layout and paint for elements not in the viewport." },
+  { id: 15, title: "overscroll-behavior",    category: "layout",    emoji: "🖱️", desc: "Stop scroll chaining without JavaScript.",                         detail: "overscroll-behavior: contain prevents a scrollable child from scrolling the page behind it." },
+  { id: 16, title: "scroll-snap",            category: "layout",    emoji: "🫰", desc: "Snapping carousels with no JS scroll library.",                    detail: "scroll-snap-type and scroll-snap-align create touch-friendly snap points entirely in CSS." },
+  { id: 17, title: "position: sticky",       category: "layout",    emoji: "📎", desc: "Sticky headers without scroll listeners.",                         detail: "position: sticky keeps an element in flow until it reaches a threshold, then pins it — no JS required." },
+  { id: 18, title: "@layer",                 category: "layout",    emoji: "🗂️", desc: "Explicit cascade ordering across stylesheets.",                    detail: "@layer lets you declare specificity order upfront — utilities always win, resets always lose." },
+
+  // selectors
+  { id: 2,  title: ":has() Selector",        category: "selectors", emoji: "🎯", desc: "Filter cards by category. No click handlers.",                    detail: ":has() lets a parent react to its children's state. The grid filters itself when a radio input is checked." },
+  { id: 19, title: ":is() / :where()",       category: "selectors", emoji: "🧩", desc: "Group selectors without repeating yourself.",                      detail: ":is() matches any selector in the list with the highest specificity. :where() does the same with zero specificity." },
+  { id: 20, title: ":not() complex",         category: "selectors", emoji: "🚫", desc: ":not() now accepts any selector list.",                            detail: "Modern :not() accepts complex selectors — :not(.active, .disabled) works natively." },
+  { id: 21, title: ":focus-visible",         category: "selectors", emoji: "🔍", desc: "Focus rings only when using a keyboard.",                          detail: ":focus-visible only applies when the browser determines the focus indicator is needed — clean mouse UX, accessible keyboard UX." },
+  { id: 22, title: ":nth-child(of S)",       category: "selectors", emoji: "🔢", desc: "nth-child filtered to a specific selector.",                       detail: ":nth-child(2 of .featured) counts only elements matching the selector — a long-requested selector upgrade." },
+  { id: 23, title: ":empty",                 category: "selectors", emoji: "🕳️", desc: "Style elements that have no content.",                             detail: ":empty matches elements with no children or text — useful for hiding placeholder containers." },
+  { id: 24, title: ":user-invalid",          category: "selectors", emoji: "⚠️", desc: "Form validation styles only after the user has interacted.",       detail: ":user-invalid only applies after the user has actually touched the field — unlike :invalid which fires immediately." },
+  { id: 25, title: "::before / ::after",     category: "selectors", emoji: "🪄", desc: "Generated content for decorative elements.",                       detail: "Pseudo-elements let you attach decorative content to any element without extra HTML — like the inner corner effect on this slide." },
+  { id: 26, title: "::backdrop",             category: "selectors", emoji: "🎭", desc: "Style the backdrop behind dialogs and fullscreen elements.",       detail: "::backdrop targets the backdrop layer of a <dialog> or fullscreen element — style it with CSS, not a JS overlay div." },
+  { id: 27, title: ":popover-open",          category: "selectors", emoji: "🪟", desc: "Style a popover when it's open.",                                  detail: ":popover-open applies when a popover element is in its shown state — pairs with @starting-style for transitions." },
+  { id: 28, title: "attr() in values",       category: "selectors", emoji: "🏷️", desc: "Pull HTML attributes into CSS values.",                           detail: "attr() lets CSS read HTML attributes — useful for data-driven styling without JavaScript." },
+  { id: 29, title: ":target",                category: "selectors", emoji: "🎪", desc: "Style the element matching the URL hash.",                         detail: ":target applies to the element whose id matches the URL fragment — a CSS-only way to show/hide content." },
+  { id: 30, title: "CSS Nesting",            category: "selectors", emoji: "🪆", desc: "Native nesting — no preprocessor needed.",                         detail: "CSS nesting is now native. Write & .child { } inside a rule and the browser handles it without Sass." },
+
+  // animation
+  { id: 3,  title: "Scroll Animations",      category: "animation", emoji: "🎬", desc: "Cards animate in on scroll. No IntersectionObserver.",             detail: "animation-timeline: view() ties an animation to an element's scroll position. Zero JavaScript." },
+  { id: 4,  title: "View Transitions",       category: "animation", emoji: "✨", desc: "Smooth state changes, defined entirely in CSS.",                   detail: "Give elements a view-transition-name and the browser handles the animated transition between states." },
+  { id: 6,  title: "@starting-style",        category: "animation", emoji: "🌅", desc: "Elements transition from their before-state on first render.",     detail: "@starting-style defines the state an element transitions FROM when it first appears. No JS timing dance." },
+  { id: 31, title: "scroll-timeline",        category: "animation", emoji: "📜", desc: "Drive animations off a specific scroll container.",                detail: "scroll-timeline names a scroll container so any element can use it as an animation-timeline source." },
+  { id: 32, title: "animation-range",        category: "animation", emoji: "📊", desc: "Control exactly when a scroll animation starts and ends.",         detail: "animation-range: entry 0% contain 50% lets you fine-tune which part of an element's scroll journey triggers the animation." },
+  { id: 33, title: "transition-behavior",    category: "animation", emoji: "🔀", desc: "Transition to and from display: none.",                            detail: "transition-behavior: allow-discrete enables transitions on discrete properties like display — finally animate things in and out properly." },
+  { id: 34, title: "linear() easing",        category: "animation", emoji: "📈", desc: "Custom spring and bounce easings in pure CSS.",                    detail: "linear() accepts multiple points to approximate any easing curve — springs, bounces, and custom physics without JavaScript." },
+  { id: 35, title: "@keyframes",             category: "animation", emoji: "🎞️", desc: "Named animation sequences.",                                       detail: "@keyframes defines the steps of an animation. Combined with animation-timeline, it now drives scroll and view-based motion too." },
+  { id: 36, title: "prefers-reduced-motion", category: "animation", emoji: "♿", desc: "Respect user motion preferences without JavaScript.",              detail: "@media (prefers-reduced-motion: reduce) lets you disable or soften animations for users who've opted out — no JS media query needed." },
+  { id: 37, title: "animation-composition",  category: "animation", emoji: "🎨", desc: "Layer multiple animations without overwriting each other.",        detail: "animation-composition: add stacks animation effects additively — scroll animation plus hover animation, no conflict." },
+  { id: 38, title: "offset-path",            category: "animation", emoji: "🛤️", desc: "Animate elements along an SVG path.",                              detail: "offset-path and offset-distance move an element along any path — no JavaScript path interpolation needed." },
+  { id: 39, title: "paint()",                category: "animation", emoji: "🖌️", desc: "Custom backgrounds via the CSS Paint API (Houdini).",              detail: "CSS.registerPaint() lets you draw custom backgrounds with canvas-like APIs, driven by CSS properties." },
+  { id: 40, title: "CSS Transitions",        category: "animation", emoji: "🌊", desc: "Smooth property changes on state change.",                         detail: "transition: all 0.2s ease is often all you need — no JS animation library, no requestAnimationFrame." },
+
+  // forms
+  { id: 41, title: "accent-color",           category: "forms",     emoji: "🎨", desc: "Brand-coloured checkboxes and radios, no custom widget.",          detail: "accent-color: var(--color-pink) applies your brand colour to native form controls — no JS-driven custom component." },
+  { id: 42, title: "field-sizing",           category: "forms",     emoji: "📝", desc: "Textareas that grow with their content.",                          detail: "field-sizing: content makes a textarea auto-resize as the user types — the JS auto-grow pattern, in one CSS line." },
+  { id: 43, title: ":valid / :invalid",      category: "forms",     emoji: "✅", desc: "Form validation feedback without JavaScript.",                     detail: "CSS :valid and :invalid reflect the browser's built-in constraint validation — style errors without a single event listener." },
+  { id: 44, title: "color-scheme",           category: "forms",     emoji: "🌓", desc: "Native dark-mode form controls.",                                  detail: "color-scheme: dark tells the browser to render native form controls in dark mode — no custom widget, no JS toggle." },
+  { id: 45, title: "appearance: none",       category: "forms",     emoji: "🎛️", desc: "Strip native form styles as the baseline for custom ones.",        detail: "appearance: none removes the OS-level styling from form controls so you can apply your own without fighting the default." },
+  { id: 46, title: "::placeholder",          category: "forms",     emoji: "💬", desc: "Style placeholder text without JavaScript.",                       detail: "::placeholder gives you full control over placeholder styling — colour, opacity, font — no JS-injected labels needed." },
+  { id: 47, title: "input[type=range]",      category: "forms",     emoji: "🎚️", desc: "Styled range sliders with no JS library.",                        detail: "::webkit-slider-thumb and ::moz-range-thumb let you fully style native range inputs — no Slider component needed." },
+  { id: 48, title: "datalist",               category: "forms",     emoji: "📋", desc: "Browser-native autocomplete suggestions.",                         detail: "<datalist> provides a native autocomplete dropdown tied to an <input> — no JavaScript autocomplete widget needed." },
+
+  // color
+  { id: 49, title: "oklch()",                category: "color",     emoji: "🌈", desc: "Perceptually uniform colours with wider gamut.",                   detail: "oklch(65% 0.28 350) defines colour in lightness, chroma, and hue — perceptually uniform and display-p3 capable." },
+  { id: 50, title: "color-mix()",            category: "color",     emoji: "🧪", desc: "Mix two colours in CSS without JavaScript.",                       detail: "color-mix(in oklch, red 40%, blue) blends colours at the CSS level — dynamic theming without JS colour math." },
+  { id: 51, title: "light-dark()",           category: "color",     emoji: "🌗", desc: "One declaration for both light and dark mode values.",             detail: "light-dark(white, black) returns the first value in light mode and the second in dark — no media query block needed." },
+  { id: 52, title: "CSS Custom Properties",  category: "color",     emoji: "🪄", desc: "Variables that cascade like any other CSS property.",              detail: "CSS custom properties (--my-var) participate in the cascade and inheritance — a runtime token system with no JavaScript." },
+  { id: 53, title: "@property",              category: "color",     emoji: "🏗️", desc: "Typed custom properties with animation support.",                  detail: "@property lets you declare a custom property's syntax, initial value, and inheritance — enabling transitions on custom properties." },
+  { id: 54, title: "Relative Color Syntax",  category: "color",     emoji: "💡", desc: "Derive colours from other colours in CSS.",                        detail: "oklch(from var(--color-primary) calc(l * 0.8) c h) creates a darkened variant of any colour — no JS colour manipulation." },
+  { id: 55, title: "color-contrast()",       category: "color",     emoji: "♿", desc: "Automatically pick the most legible colour.",                      detail: "color-contrast() picks the colour from a list with the best contrast against a target — accessible colour, zero JavaScript." },
+  { id: 56, title: "forced-colors",          category: "color",     emoji: "🖥️", desc: "Respect Windows High Contrast mode.",                              detail: "@media (forced-colors: active) lets you adapt your design to high contrast mode — system colours replace your custom palette." },
+]
+
+const categories = ["all", "layout", "selectors", "animation", "forms", "color"]
+---
+
+<div class="demo">
+  <!-- Hidden radio inputs — state holders for :has() filtering -->
+  {categories.map((cat, i) => (
+    <input
+      type="radio"
+      name="demo-filter"
+      id={`filter-${cat}`}
+      value={cat}
+      class="filter-input"
+      checked={i === 0}
+    />
+  ))}
+
+  <!-- Filter bar -->
+  <div class="filter-bar" role="group" aria-label="Filter by category">
+    {categories.map(cat => (
+      <label for={`filter-${cat}`} class="filter-btn">
+        {cat.charAt(0).toUpperCase() + cat.slice(1)}
+      </label>
+    ))}
+  </div>
+
+  <!-- Card grid — this element is the container -->
+  <div class="card-grid-container">
+    <div class="card-grid">
+      {features.map(f => (
+        <div class="card-animation-layer">
+          <article class="card" data-category={f.category}>
+            <span class="card-emoji">{f.emoji}</span>
+            <h3 class="card-title">{f.title}</h3>
+            <p class="card-desc">{f.desc}</p>
+            <div class="card-footer">
+              <button
+                class="info-btn"
+                popovertarget={`popover-${f.id}`}
+                style={`anchor-name: --anchor-${f.id}`}
+              >
+                Learn more
+              </button>
+            </div>
+
+            <!-- Popover — anchored to its trigger button via CSS -->
+            <div
+              popover
+              id={`popover-${f.id}`}
+              class="card-popover"
+              style={`position-anchor: --anchor-${f.id}`}
+            >
+              <button class="popover-close" popovertarget={`popover-${f.id}`} popovertargetaction="hide" aria-label="Close">✕</button>
+              <p>{f.detail}</p>
+            </div>
+          </article>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
+
+<style>
+  /* ─── State inputs ──────────────────────────────────────────── */
+  .filter-input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* ─── Wrapper ───────────────────────────────────────────────── */
+  .demo {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    width: 100%;
+  }
+
+  /* ─── Filter bar ────────────────────────────────────────────── */
+  .filter-bar {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .filter-btn {
+    padding: 0.35rem 1rem;
+    border: var(--border-thick);
+    border-radius: 2rem;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 0.8rem;
+    background: transparent;
+    color: var(--color-navy);
+    transition: background 0.15s, color 0.15s;
+    user-select: none;
+  }
+
+  /* Active state for each filter label */
+  #filter-all:checked ~ .filter-bar label[for="filter-all"],
+  #filter-layout:checked ~ .filter-bar label[for="filter-layout"],
+  #filter-selectors:checked ~ .filter-bar label[for="filter-selectors"],
+  #filter-animation:checked ~ .filter-bar label[for="filter-animation"] {
+    background: var(--color-navy);
+    color: var(--bg-color);
+  }
+
+  /* ─── Card grid — container ─────────────────────────────────── */
+  .card-grid-container {
+    container-type: inline-size;
+    container-name: demo-grid;
+    
+  }
+
+  .card-grid {
+    --cols: 2;
+    display: grid;
+    grid-template-columns: repeat(var(--cols), minmax(0, var(--size-content-1)));
+    gap: 1.25rem;
+    padding-block: 12rem;
+    place-items: start;
+    @media (width >= 720px)  { --cols: 4 }
+    @media (width >= 1200px) { --cols: 6 }
+    @media (width >= 1920px) { --cols: 8 }
+  }
+
+  @container demo-grid (min-width: 420px) {
+    .card-grid {
+      --cols: 2;
+    }
+  }
+
+  @container demo-grid (min-width: 680px) {
+    .card-grid {
+      --cols: 4;
+    }
+  }
+
+  @container demo-grid (min-width: 1150px) {
+    .card-grid {
+      --cols: 6;
+    }
+  }
+
+  @container demo-grid (min-width: 1600px) {
+    .card-grid {
+      --cols: 8;
+    }
+  }
+
+  /* ─── :has() filtering ──────────────────────────────────────── */
+  .demo:has(#filter-layout:checked) .card:not([data-category="layout"]) {
+    display: none;
+  }
+
+  .demo:has(#filter-selectors:checked) .card:not([data-category="selectors"]) {
+    display: none;
+  }
+
+  .demo:has(#filter-animation:checked) .card:not([data-category="animation"]) {
+    display: none;
+  }
+
+  @keyframes bloom-in {
+    from {
+      scale: .85;
+      rotate: calc((var(--side, 1) * (5deg * var(--amp, 1))));
+    }
+  }
+
+  .card-animation-layer {
+    @media (prefers-reduced-motion: no-preference) {
+      @supports (animation-timeline: view()) {
+        animation: bloom-in linear both;
+        animation-timeline: view();
+        animation-range: cover 0% contain 15%;
+      }
+    }
+  }
+
+  .card-animation-layer {
+      display: grid;
+      gap: var(--size-2);
+      width: 100%;
+      &:nth-of-type(2n + 1) { transform-origin: 25vw 100%; --side: -1; }
+      &:nth-of-type(2n)     { transform-origin: -25vw 100%; --side: 1; }
+      
+      @container demo-grid (min-width: 680px) {
+        &:nth-of-type(4n + 1) { transform-origin: 50vw 100%; --side: -1; --amp: 2; }
+        &:nth-of-type(4n + 2) { transform-origin: 25vw 100%; --side: -1; }
+        &:nth-of-type(4n + 3) { transform-origin: -25vw 100%; --side: 1 }
+        &:nth-of-type(4n)     { transform-origin: -50vw 100%; --side: 1; --amp: 2; }
+      }
+      
+      @container demo-grid (min-width: 1150px) {
+        &:nth-of-type(6n + 1) { transform-origin: 75vw 100%; --side: -1; --amp: 3; }
+        &:nth-of-type(6n + 2) { transform-origin: 50vw 100%; --side: -1; --amp: 2; }
+        &:nth-of-type(6n + 3) { transform-origin: 25vw 100%; --side: -1; }
+        &:nth-of-type(6n + 4) { transform-origin: -25vw 100%; --side: 1; }
+        &:nth-of-type(6n + 5) { transform-origin: -50vw 100%; --side: 1; --amp: 2; }
+        &:nth-of-type(6n)     { transform-origin: -75vw 100%; --side: 1; --amp: 3; }
+      }
+      
+      @container demo-grid (min-width: 1600px) {
+        &:nth-of-type(8n + 1) { transform-origin: 100vw 100%; --side: -1; --amp: 4; }
+        &:nth-of-type(8n + 2) { transform-origin: 75vw 100%; --side: -1; --amp: 3; }
+        &:nth-of-type(8n + 3) { transform-origin: 50vw 100%; --side: -1; --amp: 2; }
+        &:nth-of-type(8n + 4) { transform-origin: 25vw 100%; --side: -1; }
+        &:nth-of-type(8n + 5) { transform-origin: -25vw 100%; --side: 1; }
+        &:nth-of-type(8n + 6) { transform-origin: -50vw 100%; --side: 1; --amp: 2; }
+        &:nth-of-type(8n + 7) { transform-origin: -75vw 100%; --side: 1; --amp: 3; }
+        &:nth-of-type(8n)     { transform-origin: -100vw 100%; --side: 1; --amp: 4; }
+      }
+    }
+
+  /* ─── Cards ─────────────────────────────────────────────────── */
+  .card {
+    background: var(--bg-color);
+    border: var(--border-thick);
+    border-radius: var(--border-radius-sticker);
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  @keyframes card-enter {
+    from {
+      opacity: 0;
+      translate: 0 1rem;
+    }
+    to {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+
+  .card-emoji {
+    font-size: 1.75rem;
+    line-height: 1;
+  }
+
+  .card-title {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: var(--color-navy);
+  }
+
+  .card-desc {
+    margin: 0;
+    font-size: 0.8rem;
+    color: var(--warm-grey);
+    flex: 1;
+    line-height: 1.5;
+  }
+
+  .card-footer {
+    margin-top: 0.75rem;
+  }
+
+  /* ─── Popover trigger ───────────────────────────────────────── */
+  .info-btn {
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.3rem 0.8rem;
+    border: var(--border-thick);
+    border-radius: 2rem;
+    background: transparent;
+    color: var(--color-navy);
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+  }
+
+  .info-btn:hover {
+    background: var(--color-navy);
+    color: var(--bg-color);
+  }
+
+  /* ─── Popover ───────────────────────────────────────────────── */
+  .card-popover {
+    /* Anchor positioning — tethered to its trigger button */
+    position: fixed;
+    position-area: top center;
+    margin: 0.5rem;
+    width: 220px;
+
+    border: var(--border-thick);
+    border-radius: var(--border-radius-sticker);
+    padding: 1rem;
+    background: var(--color-yellow);
+    color: var(--color-navy);
+    font-size: 0.8rem;
+    line-height: 1.5;
+
+    /* Entrance/exit transitions with @starting-style */
+    opacity: 1;
+    translate: 0 0;
+    scale: 1;
+    transition:
+      opacity 0.2s ease,
+      translate 0.2s ease,
+      scale 0.2s ease,
+      display 0.2s allow-discrete,
+      overlay 0.2s allow-discrete;
+  }
+
+  .card-popover:not(:popover-open) {
+    opacity: 0;
+    translate: 0 6px;
+    scale: 0.95;
+  }
+
+  @starting-style {
+    .card-popover:popover-open {
+      opacity: 0;
+      translate: 0 6px;
+      scale: 0.95;
+    }
+  }
+
+  .card-popover p {
+    margin: 0;
+  }
+
+  .popover-close {
+    float: right;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: var(--color-navy);
+    padding: 0;
+    margin: -0.25rem -0.25rem 0.25rem 0.5rem;
+    line-height: 1;
+  }
+</style>

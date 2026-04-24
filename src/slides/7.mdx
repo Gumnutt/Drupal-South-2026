@@ -1,0 +1,37 @@
+---
+id: "7"
+title: "Container Queries: The Solution"
+---
+
+<div class="code-slide">
+  <div class="code-slide__header">
+    <p class="label">The solution</p>
+    <h1>The card knows where it lives.</h1>
+    <p>Name the container. Query it in CSS. Done.</p>
+  </div>
+  <div class="code-slide__code">
+
+```css
+.card-grid {
+  container-type: inline-size;
+  container-name: grid;
+}
+
+@container grid (width < 400px) {
+  .card {
+    flex-direction: column;
+    font-size: 0.875rem;
+  }
+}
+
+@container grid (width >= 600px) {
+  .card {
+    grid-template-columns: auto 1fr;
+  }
+}
+```
+
+  </div>
+</div>
+
+{/* Demo: <CardGridStage1 /> */}

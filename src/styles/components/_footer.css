@@ -1,0 +1,10 @@
+footer{
+  position: fixed;
+  bottom: 0;
+  border-top: 1px solid var(--light-grey);
+  width: 100%;
+  .navbar{
+    grid-column-start: feature-end;
+    grid-column-end: full-bleed-end;
+  }
+}

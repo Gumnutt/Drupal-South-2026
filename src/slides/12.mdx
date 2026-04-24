@@ -1,0 +1,39 @@
+---
+id: "12"
+title: "View Transitions: The Problem"
+---
+
+<div class="code-slide">
+  <div class="code-slide__header">
+    <p class="label">The problem</p>
+    <h1>A card that expands to a detail view.</h1>
+    <p>The kind of thing that used to need a framework — or a lot of this.</p>
+  </div>
+  <div class="code-slide__code">
+
+```javascript
+card.addEventListener('click', () => {
+  const rect = card.getBoundingClientRect()
+  const clone = card.cloneNode(true)
+
+  clone.style.position = 'fixed'
+  clone.style.top = rect.top + 'px'
+  clone.style.left = rect.left + 'px'
+  clone.style.width = rect.width + 'px'
+  clone.style.height = rect.height + 'px'
+
+  document.body.appendChild(clone)
+
+  requestAnimationFrame(() => {
+    clone.style.transition = 'all 0.4s ease'
+    clone.style.top = '0'
+    clone.style.left = '0'
+    clone.style.width = '100vw'
+    clone.style.height = '100vh'
+    // ... and it only gets worse from here
+  })
+})
+```
+
+  </div>
+</div>

@@ -1,0 +1,19 @@
+.card {
+  --base-padding: 0rem;
+  --content-padding: 1rem;
+
+  --card-padding: calc(e * 2);
+  --card-outer-radius: 16px;
+  --card-inner-radius: calc(var(--card-outer-radius) - var(--card-padding));
+  border: 1px solid #eaeaea;
+  border-radius: var(--card-outer-radius);
+  padding: var(--card-padding);
+  container: card / inline-size;
+  :has(> img) {
+    --card-padding: 3rem;
+  }
+  :is(h2, p) {
+    margin: 0;
+    padding-inline: var(--content-padding);
+  }
+}

@@ -1,0 +1,29 @@
+---
+import Layout from "../layouts/Layout.astro"
+import Slide from "../components/Slide.astro"
+
+export async function getStaticPaths() {
+  const matches = import.meta.glob('../slides/*.mdx', { eager: true });
+  return Object.entries(matches).map(([path, slide]) => {
+    const id = path.split('/').pop().replace('.mdx', '');
+    return {
+      params: { id },
+      props: { slide },
+    };
+  });
+}
+
+const { slide } = Astro.props;
+const Content = slide.default;
+const frontmatter = slide.frontmatter ?? {};
+---
+<Layout title={frontmatter.title ?? ''} fullscreen={frontmatter.fullscreen}>
+  <Slide transition={frontmatter.transition} background={frontmatter.background}>
+    <Content />
+  </Slide>
+</Layout>
+
+<script>
+  import "../scripts/utils/slides"
+  import "../scripts/utils/scroller"
+</script>

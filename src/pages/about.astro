@@ -1,0 +1,31 @@
+---
+import { Image } from 'astro:assets';
+import IntroLayout from '../layouts/Layout.astro';
+import IntroNavigation from '../components/IntroNav.astro';
+import Slide from '../components/Slide.astro';
+import me from '../images/me.png';
+import hat from '../images/trimmed.png';
+
+title: 'about me'
+---
+
+<IntroLayout title="Welcome to Astro." backgroundColor='hsl(260 97% 6%)'>
+  <Slide transition='circleGrow'>
+    <section class="entry about fullwidth">
+      <div class="container">
+        <div class="entryscreen">
+          <div class="text-container">
+            <h1>Greetings</h1>
+            <h2>I'm Brynn</h2>
+          </div>
+          <div class="image-container">
+            <Image src={hat} alt="Me" class="headshot" width="500" />
+            <Image src={hat} alt="Me" class="headshot shimmer" width="500" />
+          </div>
+          <div class="jumbo"></div>
+        </div>
+      </div>
+    </section>
+    <IntroNavigation prev="/qrcode" next="/slide/1" />
+  </Slide>
+</IntroLayout>

@@ -1,0 +1,44 @@
+---
+id: "14"
+title: "Anchor Positioning: The Problem"
+---
+
+<div class="code-slide">
+  <div class="code-slide__header">
+    <p class="label">The problem</p>
+    <h1>A popover that follows its trigger.</h1>
+    <p>You've either reached for Popper.js, floating-ui, or written something like this.</p>
+  </div>
+  <div class="code-slide__code">
+
+```javascript
+import { createPopper } from '@popperjs/core'
+
+const trigger = document.querySelector('.card-info-btn')
+const popover = document.querySelector('.card-popover')
+
+const popper = createPopper(trigger, popover, {
+  placement: 'top',
+  modifiers: [
+    {
+      name: 'offset',
+      options: { offset: [0, 8] },
+    },
+    {
+      name: 'preventOverflow',
+      options: { boundary: 'viewport' },
+    },
+  ],
+})
+
+trigger.addEventListener('mouseenter', () => {
+  popover.setAttribute('data-show', '')
+  popper.update()
+})
+trigger.addEventListener('mouseleave', () => {
+  popover.removeAttribute('data-show')
+})
+```
+
+  </div>
+</div>

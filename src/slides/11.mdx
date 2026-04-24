@@ -1,0 +1,32 @@
+---
+id: "11"
+title: "Scroll-Driven Animations: The Solution"
+---
+
+<div class="code-slide">
+  <div class="code-slide__header">
+    <p class="label">The solution</p>
+    <h1>Delete your <code>IntersectionObserver</code>.</h1>
+    <p>The browser knows where the element is. Just tell CSS what to do with that.</p>
+  </div>
+  <div class="code-slide__code">
+
+```css
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    translate: 0 2rem;
+  }
+}
+
+.card {
+  animation: fade-up both linear;
+  animation-timeline: view();
+  animation-range: entry 0% entry 30%;
+}
+```
+
+  </div>
+</div>
+
+{/* Demo: <CardGridStage3 /> */}

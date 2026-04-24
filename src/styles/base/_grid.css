@@ -1,0 +1,38 @@
+.container {
+  --font-size: var(--copy-width);
+  --line-height: var(--font-lineheight-3);
+  --rhythm: calc(var(--font-size) * var(--line-height));
+  display: grid;
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  grid-template-columns:
+    [full-bleed-start] 6rem
+    [feature-start] minmax(0, 1fr)
+    [breakout-start] minmax(0, calc(var(--rhythm) * 1))
+    [body-start] minmax(0, 54ch)
+    [body-end] minmax(0, calc(var(--rhythm) * 1))
+    [breakout-end] minmax(0, 1fr)
+    [feature-end] 6rem [full-bleed-end];
+  pre {
+    grid-column: breakout-start/breakout-end;
+  }
+}
+:where(.container > *) {
+  overflow-y: scroll;
+  grid-column-start: body-start;
+  grid-column-end: body-end;
+}
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.layout-grid {
+  display: grid;
+  width: 100%;
+  &.double {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 2rem;
+  }
+}

@@ -1,0 +1,90 @@
+.slide {
+  --entry-padding: 0px;
+  height: var(--display-height);
+  margin-block-start: var(--header-height);
+  @container style(--is-shaq: true) {
+    .entryscreen {
+      --entry-padding: 10rem;
+    }
+  }
+  &[data-background="navy"] {
+    background-color: var(--color-navy);
+    color: var(--white);
+  }
+  &[data-background="pink"] {
+    background-color: var(--color-pink);
+    color: var(--color-navy);
+  }
+  &[data-background="yellow"] {
+    background-color: var(--color-yellow);
+    color: var(--color-navy);
+  }
+  &[data-background="blue"] {
+    background-color: var(--color-blue);
+    color: var(--white);
+  }
+  &[data-background="red"] {
+    background-color: var(--color-red);
+    color: var(--white);
+  }
+  h1 {
+    --fs-min: 47px;
+    --fs-max: 96px;
+    font-family: var(--font-mono);
+    &:first-of-type {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
+}
+
+.entryscreen {
+  display: grid;
+  min-height: var(--display-height);
+  padding-block: var(--entry-padding);
+  place-items: center;
+  grid-column: full-bleed;
+  grid-template-columns: subgrid;
+  svg {
+    --qr-dark: white;
+    display: grid;
+    width: 100%;
+    grid-column: body-start / body-end;
+  }
+  &:has(.title-slide){
+    > div {
+      grid-column: body;
+    }
+  }
+
+  &.small {
+    grid-column: body-start/body-end;
+  }
+  > div {
+    grid-column: feature-start / feature-end;
+  }
+  .point-down {
+    text-align: center;
+  }
+  .inline {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+}
+
+button {
+  padding: 0;
+  cursor: pointer;
+  &:has(> svg) {
+    appearance: none;
+    border: none;
+    background-color: transparent;
+  }
+  svg {
+    width: 2rem;
+    color: var(--warm-grey);
+    fill: currentColor;
+    pointer-events: none;
+  }
+}

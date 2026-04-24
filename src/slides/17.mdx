@@ -1,0 +1,33 @@
+---
+id: "17"
+title: "@starting-style: The Solution"
+---
+
+<div class="code-slide">
+  <div class="code-slide__header">
+    <p class="label">The solution</p>
+    <h1>Give it a before-state to transition from.</h1>
+    <p><code>@starting-style</code> defines where an element starts when it first enters the DOM.</p>
+  </div>
+  <div class="code-slide__code">
+
+```css
+.card-popover {
+  opacity: 1;
+  translate: 0 0;
+  transition: opacity 0.2s, translate 0.2s,
+    display 0.2s allow-discrete;
+}
+
+@starting-style {
+  .card-popover {
+    opacity: 0;
+    translate: 0 0.5rem;
+  }
+}
+```
+
+  </div>
+</div>
+
+{/* Demo: <CardGridFinal /> */}

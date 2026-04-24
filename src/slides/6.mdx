@@ -1,0 +1,35 @@
+---
+id: "6"
+title: "Container Queries: The Problem"
+---
+
+<div class="code-slide">
+  <div class="code-slide__header">
+    <p class="label">The problem</p>
+    <h1>Cards that reflow based on their container.</h1>
+    <p>The old way: watch every card with a <code>ResizeObserver</code>.</p>
+  </div>
+  <div class="code-slide__code">
+
+```javascript
+const cards = document.querySelectorAll('.card')
+
+const observer = new ResizeObserver(entries => {
+  for (const entry of entries) {
+    const width = entry.contentRect.width
+
+    if (width < 300) {
+      entry.target.classList.add('card--compact')
+      entry.target.classList.remove('card--full')
+    } else {
+      entry.target.classList.add('card--full')
+      entry.target.classList.remove('card--compact')
+    }
+  }
+})
+
+cards.forEach(card => observer.observe(card))
+```
+
+  </div>
+</div>

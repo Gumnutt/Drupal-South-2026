@@ -1,0 +1,12 @@
+@property --gradient-angle {
+  inherits: false;
+  initial-value: 0deg;
+  syntax: "<angle>";
+}
+section {
+  color: var(--warm-grey);
+}
+.title-slide{
+  text-align: center;
+  line-height: 1;
+}

@@ -1,0 +1,37 @@
+---
+id: "16"
+title: "@starting-style: The Problem"
+---
+
+<div class="code-slide">
+  <div class="code-slide__header">
+    <p class="label">The problem</p>
+    <h1>The popover appears but just snaps in.</h1>
+    <p>To animate from <code>display: none</code>, you need the JS timing dance.</p>
+  </div>
+  <div class="code-slide__code">
+
+```javascript
+function showPopover(el) {
+  el.style.display = 'block'
+
+  // Force a reflow so the browser registers
+  // the element before transitioning
+  el.getBoundingClientRect()
+
+  requestAnimationFrame(() => {
+    el.classList.add('is-visible')
+  })
+}
+
+function hidePopover(el) {
+  el.classList.remove('is-visible')
+
+  el.addEventListener('transitionend', () => {
+    el.style.display = 'none'
+  }, { once: true })
+}
+```
+
+  </div>
+</div>

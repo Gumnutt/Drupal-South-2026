@@ -1,0 +1,60 @@
+:root {
+  --copy-width: clamp(1rem, 3.5vw, 1.25rem);
+  --copy-code: clamp(1rem, 3.5vw, 1.2rem);
+
+  --fs-min: 1rem;
+  --fs-max: 1.25rem;
+
+  --font-sans: "Geist", sans-serif;
+  --font-mono: "Geist Mono", monospace;
+  --font-display: "Modak", system-ui;
+  --font-display-body: "Cherry Bomb One", system-ui;
+
+  --astro-code-color-text: #c9d1d9;
+  --astro-code-color-background: #0d1117;
+  --astro-code-token-constant: #79c0ff;
+  --astro-code-token-string: #a5d6ff;
+  --astro-code-token-comment: #8b949e;
+  --astro-code-token-keyword: #ff7b72;
+  --astro-code-token-parameter: #c9d1d9;
+  --astro-code-token-function: #d2a8ff;
+  --astro-code-token-string-expression: #a5d6ff;
+  --astro-code-token-punctuation: #c9d1d9;
+  --astro-code-token-link: #000012;
+}
+
+:where(h1, h2, h3, h4, h5, h6, p, small, .subtitle){
+  font-size: clamp(var(--fs-min), 3.5vw, var(--fs-max));
+  font-family: var(--font-sans);
+  font-style: normal;
+  font-optical-sizing: auto;
+}
+
+h1{
+  --fs-min: 36px;
+  --fs-max: 72px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  grid-column: breakout;
+}
+
+h2 {
+  --fs-min: 24px;
+  --fs-max: 48px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+code {
+  font-size: 0.85em;
+  font-family: var(--font-mono);
+  color: var(--color-pink);
+}
+
+small{
+  --fs-min: 12px;
+  --fs-max: 14px;
+  font-family: var(--font-mono);
+}

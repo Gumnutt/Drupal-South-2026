@@ -1,0 +1,204 @@
+:root {
+  --glow-hue: 222deg;
+  --shadow-hue: 180deg;
+  --spring-easing: linear(
+    0,
+    0.002,
+    0.01 0.9%,
+    0.038 1.8%,
+    0.156,
+    0.312 5.8%,
+    0.789 11.1%,
+    1.015 14.2%,
+    1.096,
+    1.157,
+    1.199,
+    1.224 20.3%,
+    1.231,
+    1.231,
+    1.226,
+    1.214 24.6%,
+    1.176 26.9%,
+    1.057 32.6%,
+    1.007 35.5%,
+    0.984,
+    0.968,
+    0.956,
+    0.949 42%,
+    0.946 44.1%,
+    0.95 46.5%,
+    0.998 57.2%,
+    1.007,
+    1.011 63.3%,
+    1.012 68.3%,
+    0.998 84%,
+    1
+  );
+  --spring-duration: 1.33s;
+}
+@property --shimmer {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 33deg;
+}
+
+@keyframes shimmer {
+  0% {
+    --shimmer: 0deg;
+  }
+  100% {
+    --shimmer: 360deg;
+  }
+}
+
+@keyframes shine {
+  0% {
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  55% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes text {
+  0% {
+    background-position: 100% center;
+  }
+  100% {
+    background-position: -100% center;
+  }
+}
+.about {
+  h1 {
+    font-size: 15vw !important;
+    font-family: "GeistMono";
+    line-height: 1;
+    margin-block-start: 1em !important;
+    margin-block-end: 0;
+    font-variation-settings: "wght" 900;
+  }
+  h2 {
+    font-family: "GeistMono";
+    margin-block: 0;
+  }
+}
+section {
+  &:has(.jumbo) {
+    --active: 1;
+    background: hsl(260 calc(var(--active) * 97%) 6%);
+  }
+}
+.image-container {
+  &:has(.headshot) {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    grid-column: body-start/body-end;
+  }
+}
+.headshot {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: auto;
+  max-inline-size: 500px;
+  &:first-of-type {
+    z-index: 1;
+  }
+  &:last-of-type {
+    scale: 1.025;
+    transform-origin: center;
+  }
+}
+.shimmer {
+  position: absolute;
+  animation: shimmer 1s linear infinite both;
+  border-radius: inherit;
+  mask-image: conic-gradient(
+    from var(--shimmer, 0deg),
+    transparent 0%,
+    transparent 10%,
+    black 36%,
+    black 45%,
+    transparent 50%,
+    transparent 60%,
+    black 85%,
+    black 95%,
+    transparent 100%
+  );
+  mask-size: cover;
+  mix-blend-mode: plus-lighter;
+}
+div .shimmer::before,
+div .shimmer::after,
+div.active .shimmer::before,
+div.active .shimmer::after {
+  opacity: 1;
+  animation: shine 1.2s ease-in 1 forwards infinite;
+}
+.shimmer::before,
+.shimmer::after {
+  content: "";
+  position: absolute;
+  opacity: 0;
+  transition: all 0.5s ease;
+  border-radius: inherit;
+  mix-blend-mode: color;
+  inset: 40px;
+  pointer-events: none;
+}
+.shimmer::before {
+  z-index: -1;
+  box-shadow: 0 0 3px 2px hsl(var(--glow-hue) 20% 95%), 0 0 7px 4px hsl(var(--glow-hue) 20% 80%), 0 0 13px 4px hsl(var(--glow-hue) 50% 70%),
+    0 0 25px 5px hsl(var(--glow-hue) 100% 70%);
+}
+
+.shimmer::after {
+  z-index: 2;
+  box-shadow: inset 0 0 0 1px hsl(var(--glow-hue) 70% 95%), inset 0 0 2px 1px hsl(var(--glow-hue) 100% 80%),
+    inset 0 0 5px 2px hsl(var(--glow-hue) 100% 70%);
+}
+
+@keyframes jumbo {
+  from {
+    background-position: 50% 50%, 50% 50%;
+  }
+  to {
+    background-position: 350% 50%, 350% 50%;
+  }
+}
+
+.jumbo {
+  --stripes: repeating-linear-gradient(100deg, #fff 0%, #fff 7%, transparent 10%, transparent 12%, #fff 16%);
+  --stripesDark: repeating-linear-gradient(100deg, #000 0%, #000 7%, transparent 10%, transparent 12%, #000 16%);
+  --rainbow: repeating-linear-gradient(100deg, #60a5fa 10%, #e879f9 15%, #60a5fa 20%, #5eead4 25%, #60a5fa 30%);
+  position: absolute;
+  opacity: 50%;
+  background-image: var(--stripesDark), var(--rainbow);
+  background-position: 50% 50%, 50% 50%;
+  background-size: 300%, 200%;
+  inset: -10px;
+
+  filter: blur(10px) invert(100%);
+
+  mask-image: radial-gradient(ellipse at 100% 0%, black 40%, transparent 70%);
+
+  pointer-events: none;
+}
+
+.jumbo::after {
+  content: "";
+  position: absolute;
+  animation: jumbo 60s linear infinite;
+  background-image: var(--stripes), var(--rainbow);
+  background-attachment: fixed;
+  background-size: 200%, 100%;
+  inset: 0;
+  mix-blend-mode: difference;
+}

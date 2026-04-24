@@ -1,0 +1,42 @@
+.trig-demo-simple {
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  gap: 2rem;
+  .circle {
+    --point-size: 32px;
+    --width: 300px;
+    position: relative;
+    border: 2px dashed #fff;
+    border-radius: 50%;
+    width: var(--width);
+    aspect-ratio: 1;
+  }
+  .inputs {
+    display: flex;
+    flex-direction: column;
+    place-items: center;
+  }
+  label {
+    display: flex;
+    gap: 0.5rem;
+  }
+  .point {
+    --angle: 90deg;
+
+    /* we subtract the point size to place point inside circle */
+    --radius: calc((var(--width) / 2) - (var(--point-size) / 2));
+
+    --x: calc(var(--radius) * cos(var(--angle)));
+    --y: calc(var(--radius) * sin(var(--angle)));
+
+    /* position point at center of circle with radius. We add x and y values to move to edge of circle. */
+    position: absolute;
+    top: calc(var(--radius) + var(--y));
+    left: calc(var(--radius) + var(--x));
+    border-radius: 50%;
+    width: var(--point-size);
+    height: var(--point-size);
+    background-color: white;
+  }
+}

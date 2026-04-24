@@ -1,0 +1,33 @@
+---
+id: "10"
+title: "Scroll-Driven Animations: The Problem"
+---
+
+<div class="code-slide">
+  <div class="code-slide__header">
+    <p class="label">The problem</p>
+    <h1>Animating cards as they enter the viewport.</h1>
+    <p>You've written this. We all have.</p>
+  </div>
+  <div class="code-slide__code">
+
+```javascript
+const cards = document.querySelectorAll('.card')
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible')
+      observer.unobserve(entry.target)
+    }
+  })
+}, {
+  threshold: 0.2,
+  rootMargin: '0px 0px -50px 0px'
+})
+
+cards.forEach(card => observer.observe(card))
+```
+
+  </div>
+</div>

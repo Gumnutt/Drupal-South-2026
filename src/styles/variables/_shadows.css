@@ -1,0 +1,33 @@
+:root{
+  --shadow-sticker: 4px 4px 0 var(--color-navy);
+  --shadow-sticker-lg: 8px 8px 0 var(--color-navy);
+
+  --gradient-yellow: conic-gradient(var(--color-navy) 45deg, var(--color-yellow) 45deg 110deg, var(--color-navy) 110deg);
+
+  --text-sticker:
+    1px 1px 0 var(--color-navy),
+    2px 2px 0 var(--color-navy),
+    3px 3px 0 var(--color-navy),
+    4px 4px 0 var(--color-navy),
+    5px 5px 0 var(--color-navy),
+    6px 6px 0 var(--color-navy),
+    7px 7px 0 var(--color-navy),
+    8px 8px 0 var(--color-navy);
+
+  --shadow-sticker-super: 
+    1px 1px 0 var(--color-navy),
+    2px 2px 0 var(--color-navy),
+    3px 3px 0 var(--color-navy),
+    4px 4px 0 var(--color-navy),
+    5px 5px 0 var(--color-navy),
+    6px 6px 0 var(--color-yellow),
+    7px 7px 0 var(--color-yellow),
+    8px 8px 0 var(--color-yellow),
+    9px 9px 0 var(--color-navy),
+    10px 10px 0 var(--color-navy),
+    10px 11px 0 var(--color-navy),
+    12px 12px 0 var(--color-navy),
+    13px 13px 0 var(--color-navy),
+    14px 14px 0 var(--color-navy),
+    15px 15px 0 var(--color-navy);
+}

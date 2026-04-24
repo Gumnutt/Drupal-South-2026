@@ -1,0 +1,17 @@
+:root{
+  --white: #ffffff;
+  --bg-color: #fefaf0;
+  --light-grey: #f1ece2;
+  --dark-grey: #262325;
+  --warm-grey: oklch(0.46 0.01 337.86);
+
+  --color-pink: oklch(65% 0.28 350);                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+  --color-navy: oklch(20% 0.08 260);                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+  --color-yellow: oklch(82% 0.18 85);
+  --color-blue: oklch(55% 0.2 255);
+  --color-red: oklch(52% 0.22 25);
+
+  --border-thick: 3px solid var(--color-navy);
+  --border-super-thick: 10px solid var(--color-navy);
+  --border-radius-sticker: 0.75rem;
+}

@@ -1,0 +1,36 @@
+---
+id: "8"
+title: ":has() — The Problem"
+---
+
+<div class="code-slide">
+  <div class="code-slide__header">
+    <p class="label">The problem</p>
+    <h1>Filtering without a page reload.</h1>
+    <p>A click handler for every filter, a loop over every card, classList juggling.</p>
+  </div>
+  <div class="code-slide__code">
+
+```javascript
+const filters = document.querySelectorAll('.filter-btn')
+const cards = document.querySelectorAll('.card')
+
+filters.forEach(filter => {
+  filter.addEventListener('click', () => {
+    const category = filter.dataset.category
+
+    filters.forEach(f => f.classList.remove('active'))
+    filter.classList.add('active')
+
+    cards.forEach(card => {
+      const match = category === 'all'
+        || card.dataset.category === category
+
+      card.classList.toggle('hidden', !match)
+    })
+  })
+})
+```
+
+  </div>
+</div>

@@ -1,0 +1,34 @@
+---
+id: "9"
+title: ":has() — The Solution"
+---
+
+<div class="code-slide">
+  <div class="code-slide__header">
+    <p class="label">The solution</p>
+    <h1>CSS as a state machine.</h1>
+    <p>The grid reacts to its own contents. No event listeners. No class toggling.</p>
+  </div>
+  <div class="code-slide__code">
+
+```css
+/* Hidden radio buttons drive the state */
+.card-grid:has(#filter-design:checked)
+  .card:not([data-category="design"]) {
+  opacity: 0.3;
+  scale: 0.95;
+  pointer-events: none;
+}
+
+.card-grid:has(#filter-dev:checked)
+  .card:not([data-category="dev"]) {
+  opacity: 0.3;
+  scale: 0.95;
+  pointer-events: none;
+}
+```
+
+  </div>
+</div>
+
+{/* Demo: <CardGridStage2 /> */}

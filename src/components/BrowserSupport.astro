@@ -1,0 +1,75 @@
+---
+import ChromeIcon from '../images/browsers/chrome.svg?raw';
+import EdgeIcon from '../images/browsers/edge.svg?raw';
+import FirefoxIcon from '../images/browsers/firefox.svg?raw';
+import SafariIcon from '../images/browsers/safari.svg?raw';
+import bcd from '@mdn/browser-compat-data' assert { type: 'json' };
+
+interface BrowserProps {
+  version: string | null;
+  support: 'yes' | 'no' | 'partial' | 'unknown';
+}
+
+interface Props {
+  name: string;
+  type: string;
+}
+
+// Extracting the component name from Astro.props
+const { name, type } = Astro.props;
+
+const nameParts = name.split('.');
+const supportData = nameParts.reduce((acc, curr) => acc[curr] ? acc[curr] : acc, bcd.css[type]);
+
+const support = supportData?.__compat || null;
+const browsers = ['chrome', 'edge', 'firefox', 'safari'];
+
+const browserSupport = (browser: string): BrowserProps => {
+  if (!support || !support.support || !support.support[browser]) {
+    return { version: null, support: 'unknown' };
+  }
+  let browserData = support.support[browser];
+  if (Array.isArray(browserData)) {
+    browserData = browserData[0];
+  }
+
+  const version_added = browserData.version_added;
+  const version_removed = browserData.version_removed;
+  let supportStatus: 'yes' | 'no' | 'partial' | 'unknown' = version_added ? 'yes' : 'no';
+  if (browserData.flags) {
+    supportStatus = 'partial';
+  }
+
+  return {
+    version: typeof version_added === 'string' ? version_added : null,
+    support: version_removed ? 'no' : supportStatus,
+  };
+};
+---
+<div class="browser-support">
+  <ul>
+    {browsers.map(browser => {
+      const { version, support } = browserSupport(browser);
+      return (
+        <li data-browser={browser} data-support={support}>
+          <div class="icon-wrapper">
+            {/* Dynamically set the SVG based on the browser */}
+            <Fragment set:html={{chrome: ChromeIcon, edge: EdgeIcon, firefox: FirefoxIcon, safari: SafariIcon}[browser]} />
+          </div>
+          {/*<p>{version ? version : 'Not Supported'}</p> */}
+        </li>
+      );
+    })}
+    <li class="source">
+      {support?.mdn_url && <p><a href={support.mdn_url}>Source</a></p>}
+    </li>
+  </ul>
+  <div class="source">
+    
+  </div>
+</div>
+
+<script>
+  import bcd from '@mdn/browser-compat-data' assert { type: 'json' };
+  const support = bcd.css.properties
+</script>

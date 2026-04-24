@@ -1,0 +1,9 @@
+---
+import BrowserSupport from "../components/BrowserSupport.astro"
+const {type, name} = Astro.props
+---
+<div class="page-border">
+  <div class="container">
+    <BrowserSupport type={type} name={name} />
+  </div>
+</div>

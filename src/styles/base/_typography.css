@@ -47,10 +47,158 @@ li {
   --fs-min: 48px;
   --fs-max: 96px;
   font-family: var(--font-display);
-  color: var(--color-yellow);
+  color: var(--warm-grey);
 }
 
 .text-sticker{
   -webkit-text-stroke: 3px var(--color-navy); 
   text-shadow: var(--text-sticker);
+}
+
+.masking-tape{
+  --saturate: 2.8;
+    --brightness: 1.25;
+    --contrast: 1;
+    --blur: 8;
+    --shade: color-mix(var(--warm-grey) 10%, transparent);
+    --spread: 1;
+    --s1: calc((var(--spread) * 1px) * pow(2, 0));
+    --s2: calc((var(--spread) * 1px) * pow(2, 1));
+    --s3: calc((var(--spread) * 1px) * pow(2, 2));
+    --s4: calc((var(--spread) * 1px) * pow(2, 3));
+    --s5: calc((var(--spread) * 1px) * pow(2, 4));
+    /* this becomes the angle of spread, -1 through to 1 */
+    --x: 0;
+    --perfect-shadow: 0 0 0 1px var(--base), 0 1px 1px -0.5px var(--shade),
+      calc(var(--s1) * var(--x)) var(--s1) var(--s1) calc(var(--s1) * -0.5)
+        var(--shade),
+      calc(var(--s2) * var(--x)) var(--s2) var(--s2) calc(var(--s2) * -0.5)
+        var(--shade),
+      calc(var(--s3) * var(--x)) var(--s3) var(--s3) calc(var(--s3) * -0.5)
+        var(--base),
+      calc(var(--s4) * var(--x)) var(--s4) var(--s4) calc(var(--s4) * -0.5)
+        var(--base),
+      calc(var(--s5) * var(--x)) var(--s5) var(--s5) calc(var(--s5) * -0.5)
+        var(--base);
+    rotate: -9deg;
+    box-shadow: var(--perfect-shadow);
+    width: max-content;
+    padding-block: 0.2rem;
+    padding-inline: 2.2rem 4.2rem;
+    background: linear-gradient(oklch(98.546% 0.01374 88.668 / 0.75) 0 100%);
+    -webkit-backdrop-filter: blur(calc(var(--blur) * 1px)) saturate(var(--saturate, 2.8)) brightness(var(--brightness, 1.25)) contrast(var(--contrast, 1));
+    backdrop-filter: blur(calc(var(--blur) * 1px)) saturate(var(--saturate, 2.8)) brightness(var(--brightness, 1.25)) contrast(var(--contrast, 1));
+    border-shape: shape(
+      /* Start top-right, travel down the right edge */
+      from calc(100% - 10px) 0%,
+      curve to calc(100% - 10.5px) 2.88% with calc(100% - 18px) 1.92%,
+      curve to calc(100% - 5.5px) 4.81% with calc(100% - 3px) 3.85%,
+      curve to calc(100% - 8.5px) 6.73% with calc(100% - 8px) 5.77%,
+      curve to calc(100% - 9.5px) 8.65% with calc(100% - 9px) 7.69%,
+      curve to calc(100% - 8.5px) 10.58% with calc(100% - 10px) 9.62%,
+      curve to calc(100% - 13.5px) 12.5% with calc(100% - 7px) 11.54%,
+      curve to calc(100% - 17.5px) 14.42% with calc(100% - 20px) 13.46%,
+      curve to calc(100% - 12.5px) 16.35% with calc(100% - 15px) 15.38%,
+      curve to calc(100% - 13px) 18.27% with calc(100% - 10px) 17.31%,
+      curve to calc(100% - 12.5px) 20.19% with calc(100% - 16px) 19.23%,
+      curve to calc(100% - 11.5px) 22.12% with calc(100% - 9px) 21.15%,
+      curve to calc(100% - 11.5px) 24.04% with calc(100% - 14px) 23.08%,
+      curve to calc(100% - 14px) 25.96% with calc(100% - 9px) 25%,
+      curve to calc(100% - 13.5px) 27.88% with calc(100% - 19px) 26.92%,
+      curve to calc(100% - 6.5px) 29.81% with calc(100% - 8px) 28.85%,
+      curve to calc(100% - 7.5px) 31.73% with calc(100% - 5px) 30.77%,
+      curve to calc(100% - 13.5px) 33.65% with calc(100% - 10px) 32.69%,
+      curve to calc(100% - 17.5px) 35.58% with calc(100% - 17px) 34.62%,
+      curve to calc(100% - 10px) 37.5% with calc(100% - 18px) 36.54%,
+      curve to calc(100% - 7px) 39.42% with calc(100% - 2px) 38.46%,
+      curve to calc(100% - 8.5px) 41.35% with calc(100% - 12px) 40.38%,
+      curve to calc(100% - 4.5px) 43.27% with calc(100% - 5px) 42.31%,
+      curve to calc(100% - 7px) 45.19% with calc(100% - 4px) 44.23%,
+      curve to calc(100% - 7px) 47.12% with calc(100% - 10px) 46.15%,
+      curve to calc(100% - 9.5px) 49.04% with calc(100% - 4px) 48.08%,
+      curve to calc(100% - 17px) 50.96% with calc(100% - 15px) 50%,
+      curve to calc(100% - 13px) 52.88% with calc(100% - 19px) 51.92%,
+      curve to calc(100% - 8px) 54.81% with calc(100% - 7px) 53.85%,
+      curve to calc(100% - 11.5px) 56.73% with calc(100% - 9px) 55.77%,
+      curve to calc(100% - 14.5px) 58.65% with calc(100% - 14px) 57.69%,
+      curve to calc(100% - 15px) 60.58% with calc(100% - 15px) 59.62%,
+      curve to calc(100% - 13.5px) 62.5% with calc(100% - 15px) 61.54%,
+      curve to calc(100% - 7px) 64.42% with calc(100% - 12px) 63.46%,
+      curve to calc(100% - 5px) 66.35% with calc(100% - 2px) 65.38%,
+      curve to calc(100% - 13.5px) 68.27% with calc(100% - 8px) 67.31%,
+      curve to calc(100% - 12.5px) 70.19% with calc(100% - 19px) 69.23%,
+      curve to calc(100% - 8px) 72.12% with calc(100% - 6px) 71.15%,
+      curve to calc(100% - 14px) 74.04% with calc(100% - 10px) 73.08%,
+      curve to calc(100% - 15.5px) 75.96% with calc(100% - 18px) 75%,
+      curve to calc(100% - 15px) 77.88% with calc(100% - 13px) 76.92%,
+      curve to calc(100% - 11.5px) 79.81% with calc(100% - 17px) 78.85%,
+      curve to calc(100% - 7.5px) 81.73% with calc(100% - 6px) 80.77%,
+      curve to calc(100% - 8px) 83.65% with calc(100% - 9px) 82.69%,
+      curve to calc(100% - 4px) 85.58% with calc(100% - 7px) 84.62%,
+      curve to calc(100% - 6.5px) 87.5% with calc(100% - 1px) 86.54%,
+      curve to calc(100% - 8px) 89.42% with calc(100% - 12px) 88.46%,
+      curve to calc(100% - 12px) 91.35% with calc(100% - 4px) 90.38%,
+      curve to calc(100% - 17.5px) 93.27% with calc(100% - 20px) 92.31%,
+      curve to calc(100% - 17.5px) 95.19% with calc(100% - 15px) 94.23%,
+      curve to calc(100% - 11.5px) 97.12% with calc(100% - 20px) 96.15%,
+      curve to calc(100% - 10px) 100% with calc(100% - 3px) 98.08%,
+
+      /* Bottom-right corner to bottom-left corner (straight) */
+      line to 10px 100%,
+
+      /* Travel back up the left edge (reversed, bottom to top) */
+      curve to 11.5px 97.12% with 3px 98.08%,
+      curve to 17.5px 95.19% with 20px 96.15%,
+      curve to 17.5px 93.27% with 15px 94.23%,
+      curve to 12px 91.35% with 20px 92.31%,
+      curve to 8px 89.42% with 4px 90.38%,
+      curve to 6.5px 87.5% with 12px 88.46%,
+      curve to 4px 85.58% with 1px 86.54%,
+      curve to 8px 83.65% with 7px 84.62%,
+      curve to 7.5px 81.73% with 9px 82.69%,
+      curve to 11.5px 79.81% with 6px 80.77%,
+      curve to 15px 77.88% with 17px 78.85%,
+      curve to 15.5px 75.96% with 13px 76.92%,
+      curve to 14px 74.04% with 18px 75%,
+      curve to 8px 72.12% with 10px 73.08%,
+      curve to 12.5px 70.19% with 6px 71.15%,
+      curve to 13.5px 68.27% with 19px 69.23%,
+      curve to 5px 66.35% with 8px 67.31%,
+      curve to 7px 64.42% with 2px 65.38%,
+      curve to 13.5px 62.5% with 12px 63.46%,
+      curve to 15px 60.58% with 15px 61.54%,
+      curve to 14.5px 58.65% with 15px 59.62%,
+      curve to 11.5px 56.73% with 14px 57.69%,
+      curve to 8px 54.81% with 9px 55.77%,
+      curve to 13px 52.88% with 7px 53.85%,
+      curve to 17px 50.96% with 19px 51.92%,
+      curve to 9.5px 49.04% with 15px 50%,
+      curve to 7px 47.12% with 4px 48.08%,
+      curve to 7px 45.19% with 10px 46.15%,
+      curve to 4.5px 43.27% with 4px 44.23%,
+      curve to 8.5px 41.35% with 5px 42.31%,
+      curve to 7px 39.42% with 12px 40.38%,
+      curve to 10px 37.5% with 2px 38.46%,
+      curve to 17.5px 35.58% with 18px 36.54%,
+      curve to 13.5px 33.65% with 17px 34.62%,
+      curve to 7.5px 31.73% with 10px 32.69%,
+      curve to 6.5px 29.81% with 5px 30.77%,
+      curve to 13.5px 27.88% with 8px 28.85%,
+      curve to 14px 25.96% with 19px 26.92%,
+      curve to 11.5px 24.04% with 9px 25%,
+      curve to 11.5px 22.12% with 14px 23.08%,
+      curve to 12.5px 20.19% with 9px 21.15%,
+      curve to 13px 18.27% with 16px 19.23%,
+      curve to 12.5px 16.35% with 10px 17.31%,
+      curve to 17.5px 14.42% with 15px 15.38%,
+      curve to 13.5px 12.5% with 20px 13.46%,
+      curve to 8.5px 10.58% with 7px 11.54%,
+      curve to 9.5px 8.65% with 10px 9.62%,
+      curve to 8.5px 6.73% with 9px 7.69%,
+      curve to 5.5px 4.81% with 8px 5.77%,
+      curve to 10.5px 2.88% with 3px 3.85%,
+      curve to 10px 0% with 18px 1.92%,
+
+      close
+    );
 }

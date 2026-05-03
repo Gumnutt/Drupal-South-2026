@@ -4,6 +4,7 @@
 
 html {
   background-color: var(--bg-color);
+  color-scheme: light dark;
 }
 
 :root{
@@ -19,4 +20,25 @@ html {
   justify-content: space-between;
   align-items: center;
   gap: 1.5rem;
+}
+
+.paper-grid{
+  --line-weight: 2px;
+  --cell-size: 40px;
+
+  background-image:
+    linear-gradient(to right, lightblue var(--line-weight), transparent var(--line-weight)),
+    linear-gradient(to bottom, lightblue var(--line-weight), transparent var(--line-weight));
+  background-size: var(--cell-size) var(--cell-size);
+}
+
+.paper-blueprint{
+  --line-color: lightblue;
+  --light-line-color: color-mix(var(--line-color)90%, transparent);
+  background-image: 
+    linear-gradient(var(--light-line-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--light-line-color) 1px, transparent 1px),
+    linear-gradient(var(--line-color) 2px, transparent 2px),
+    linear-gradient(90deg, var(--line-color) 2px, transparent 2px);
+  background-size: 30px 30px, 30px 30px, 120px 120px, 120px 120px;
 }

@@ -30,7 +30,8 @@
   h1 {
     --fs-min: 47px;
     --fs-max: 96px;
-    font-family: var(--font-mono);
+    font-family: var(--font-serif);
+    color: var(--color-orange);
     &:first-of-type {
       margin-top: 0;
       margin-bottom: 0;
@@ -45,6 +46,9 @@
   place-items: center;
   grid-column: full-bleed;
   grid-template-columns: subgrid;
+  &.demo{
+    place-items: start;
+  }
   svg {
     --qr-dark: white;
     display: grid;

@@ -1,0 +1,14 @@
+::view-transition-old(demo-filter-bar),
+::view-transition-new(demo-filter-bar),
+::view-transition-old(header),
+::view-transition-new(header),
+::view-transition-old(footer),
+::view-transition-new(footer),
+::view-transition-old(location),
+::view-transition-new(location) {
+  animation: none;
+}
+::view-transition-group(header),
+::view-transition-group(footer) {
+	z-index: 100;
+}

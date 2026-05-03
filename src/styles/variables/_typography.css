@@ -5,9 +5,10 @@
   --fs-min: 1rem;
   --fs-max: 1.25rem;
 
+  --font-serif: "Averia Serif Libre", serif;
   --font-sans: "Geist", sans-serif;
   --font-mono: "Geist Mono", monospace;
-  --font-display: "Modak", system-ui;
+  --font-display: "Gochi Hand", system-ui;
   --font-display-body: "Cherry Bomb One", system-ui;
 
   --astro-code-color-text: #c9d1d9;

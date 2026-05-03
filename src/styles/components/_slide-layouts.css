@@ -26,40 +26,6 @@
 .title-slide {
   display: grid;
   gap: 1.5rem;
-
-  h1 {
-    --fs-min: 80px;
-    --fs-max: 96px;
-    --extrude-color: oklch(12% 0.08 260);
-    margin: 0;
-    font-family: var(--font-display);
-    color: var(--color-yellow);
-    -webkit-text-stroke: 2px var(--extrude-color);
-    text-shadow:
-      1px 1px 0 var(--extrude-color),
-      2px 2px 0 var(--extrude-color),
-      3px 3px 0 var(--extrude-color),
-      4px 4px 0 var(--extrude-color),
-      5px 5px 0 var(--extrude-color),
-      6px 6px 0 var(--extrude-color),
-      7px 7px 0 var(--extrude-color),
-      8px 8px 0 var(--extrude-color);
-
-    em {
-      font-style: normal;
-      color: transparent;
-      -webkit-text-stroke: 3px var(--color-pink);
-      text-shadow:
-        1px 1px 0 oklch(35% 0.2 350),
-        2px 2px 0 oklch(35% 0.2 350),
-        3px 3px 0 oklch(35% 0.2 350),
-        4px 4px 0 oklch(35% 0.2 350),
-        5px 5px 0 oklch(35% 0.2 350),
-        6px 6px 0 oklch(35% 0.2 350),
-        7px 7px 0 oklch(35% 0.2 350),
-        8px 8px 0 oklch(35% 0.2 350);
-    }
-  }
 }
 
 /* ============================================
@@ -68,10 +34,8 @@
 
 /* Shared label style — small mono uppercase tag */
 .label {
-  opacity: 0.5;
-  margin: 0;
   font-size: 0.75rem;
-  font-family: var(--font-mono);
+  font-family: var(--font-display);
   text-transform: uppercase;
   letter-spacing: 0.12em;
 }

@@ -3,6 +3,8 @@ footer{
   bottom: 0;
   border-top: 1px solid var(--light-grey);
   width: 100%;
+  background-color: var(--bg-color);
+  view-transition-name: footer;
   .navbar{
     grid-column-start: feature-end;
     grid-column-end: full-bleed-end;

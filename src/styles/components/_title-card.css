@@ -1,45 +1,9 @@
-.title-card{
-  --card-radius: 80px;
-  --card-skew: 6;
-  --inner-border-width: 20px;
-  --inner-border-color: color-mix(var(--color-yellow) 40%, var(--bg-color));
-  position: relative;
-  transform: skew(calc(1deg * var(--card-skew)), 0deg);
-  box-shadow: var(--shadow-sticker-super);
-  border-radius: var(--card-radius);
-  padding: 2rem;
-  corner-shape: squircle;
-  &:after {
-    --card-skew: 3;
-    content: '';
-    position: absolute;
-    z-index: -1;
-    bottom: 8px;
-    right: 8px;
-    transform: skew(calc(1deg * var(--card-skew)), 0deg);
-    border-width: 0 var(--inner-border-width) var(--inner-border-width) 0;
-    border-style: solid;
-    border-color: var(--inner-border-color);
-    border-top-right-radius: var(--inner-border-width);
-    border-bottom-right-radius: var(--card-radius);
-    border-bottom-left-radius: var(--inner-border-width);
-    width: 80px;
-    height: 80px;
-    corner-shape: squircle;
-  }                                                                                                                                                                                                                                                
-  & > * {
-    transform: skew(calc(-1deg * var(--card-skew)), 0deg);
+.title-card {
+  h1 {
+    font-family: var(--font-display);
+    color: var(--color-orange);
   }
   .subtitle{
-    position: absolute;
-    top: 0;
-    left: 0;
-    translate: -50% -50%;
-    rotate: -12.5deg;
-    animation: 500ms linear 1s infinite alternate pulse;
-    width: min-content;
-    font-size: 3rem;
-    line-height: 0.8;
-    color: var(--color-yellow);
+    translate: 110% -46%;
   }
 }

@@ -10,6 +10,7 @@
   --color-yellow: oklch(82% 0.18 85);
   --color-blue: oklch(55% 0.2 255);
   --color-red: oklch(52% 0.22 25);
+  --color-orange: oklch(63.293% 0.18229 29.715);
 
   --border-thick: 3px solid var(--color-navy);
   --border-super-thick: 10px solid var(--color-navy);

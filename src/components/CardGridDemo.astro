@@ -1,4 +1,6 @@
 ---
+import DisclosablePopover from "./DisclosablePopover.astro"
+
 const features = [
   // layout
   { id: 1,  title: "Container Queries",      category: "layout",    emoji: "📦", desc: "Cards that respond to their container, not the viewport.",         detail: "@container lets each card adapt its layout based on the space it's given — not a global breakpoint." },
@@ -68,35 +70,42 @@ const features = [
 ]
 
 const categories = ["all", "layout", "selectors", "animation", "forms", "color"]
+
+const shuffled = [...features].sort(() => Math.random() - 0.5)
 ---
 
-<div class="demo">
-  <!-- Hidden radio inputs — state holders for :has() filtering -->
-  {categories.map((cat, i) => (
-    <input
-      type="radio"
-      name="demo-filter"
-      id={`filter-${cat}`}
-      value={cat}
-      class="filter-input"
-      checked={i === 0}
-    />
-  ))}
+<div class="demo" data-area="center">
 
-  <!-- Filter bar -->
-  <div class="filter-bar" role="group" aria-label="Filter by category">
-    {categories.map(cat => (
-      <label for={`filter-${cat}`} class="filter-btn">
-        {cat.charAt(0).toUpperCase() + cat.slice(1)}
-      </label>
+  
+
+  <DisclosablePopover buttonText="Filters">
+    <!-- Hidden radio inputs — state holders for :has() filtering -->
+    {categories.map((cat, i) => (
+      <input
+        type="radio"
+        name="demo-filter"
+        id={`filter-${cat}`}
+        value={cat}
+        class="filter-input"
+        checked={i === 0}
+      />
     ))}
-  </div>
+    <div class="filter-bar" role="group" aria-label="Filter by category">
+      {categories.map(cat => (
+        <label for={`filter-${cat}`} class="filter-btn">
+          {cat.charAt(0).toUpperCase() + cat.slice(1)}
+        </label>
+      ))}
+    </div>
+  </DisclosablePopover>
+  
+  
 
   <!-- Card grid — this element is the container -->
   <div class="card-grid-container">
     <div class="card-grid">
-      {features.map(f => (
-        <div class="card-animation-layer">
+      {shuffled.map(f => (
+        <div class="card-animation-layer" style={`view-transition-name: card-${f.id}`}>
           <article class="card" data-category={f.category}>
             <span class="card-emoji">{f.emoji}</span>
             <h3 class="card-title">{f.title}</h3>
@@ -128,6 +137,61 @@ const categories = ["all", "layout", "selectors", "animation", "forms", "color"]
   </div>
 </div>
 
+<script>
+  function initFilterTransitions() {
+    const inputs = document.querySelectorAll<HTMLInputElement>('.demo .filter-input')
+
+    inputs.forEach(input => {
+      input.addEventListener('click', (e) => {
+        const target = e.target as HTMLInputElement
+        const grid = document.querySelector('.card-grid-container') as HTMLElement & {
+          startViewTransition?: typeof document.startViewTransition
+        }
+
+        e.preventDefault()
+
+        const update = () => { target.checked = true }
+
+        // Level 2: scoped to the grid subtree — filter bar is outside, unaffected
+        // Level 1 fallback: suppress root in CSS and use document
+        if (grid?.startViewTransition) {
+          grid.startViewTransition(update)
+        } else if (document.startViewTransition) {
+          document.startViewTransition(update)
+        } else {
+          update()
+        }
+      })
+    })
+  }
+
+  // Re-init after Astro page transitions
+  document.addEventListener('astro:page-load', initFilterTransitions)
+</script>
+
+<style is:global>
+
+  @keyframes vt-card-out {
+    to {
+      opacity: 0;
+      scale: 0.85;
+      rotate: 15deg;
+      transform-origin: top left;
+      filter: blur(2px);
+    }
+  }
+
+  @keyframes vt-card-in {
+    from {
+      opacity: 0;
+      scale: 0.85;
+      rotate: 15deg;
+      transform-origin: top left;
+      filter: blur(2px);
+    }
+  }
+</style>
+
 <style>
   /* ─── State inputs ──────────────────────────────────────────── */
   .filter-input {
@@ -142,6 +206,7 @@ const categories = ["all", "layout", "selectors", "animation", "forms", "color"]
     flex-direction: column;
     gap: 1.25rem;
     width: 100%;
+    padding-block: 5rem;
   }
 
   /* ─── Filter bar ────────────────────────────────────────────── */
@@ -149,11 +214,12 @@ const categories = ["all", "layout", "selectors", "animation", "forms", "color"]
     display: flex;
     gap: 0.5rem;
     flex-wrap: wrap;
+    view-transition-name: demo-filter-bar;
   }
 
   .filter-btn {
     padding: 0.35rem 1rem;
-    border: var(--border-thick);
+    border: 1px solid var(--color-navy);
     border-radius: 2rem;
     cursor: pointer;
     font-weight: 700;
@@ -168,6 +234,8 @@ const categories = ["all", "layout", "selectors", "animation", "forms", "color"]
   #filter-all:checked ~ .filter-bar label[for="filter-all"],
   #filter-layout:checked ~ .filter-bar label[for="filter-layout"],
   #filter-selectors:checked ~ .filter-bar label[for="filter-selectors"],
+  #filter-forms:checked ~ .filter-bar label[for="filter-forms"],
+  #filter-color:checked ~ .filter-bar label[for="filter-color"],
   #filter-animation:checked ~ .filter-bar label[for="filter-animation"] {
     background: var(--color-navy);
     color: var(--bg-color);
@@ -177,7 +245,20 @@ const categories = ["all", "layout", "selectors", "animation", "forms", "color"]
   .card-grid-container {
     container-type: inline-size;
     container-name: demo-grid;
-    
+    ::view-transition-old(*) {
+      animation: vt-card-out 0.2s ease both;
+    }
+
+    /* Cards entering the filtered view */
+    ::view-transition-new(*) {
+      animation: vt-card-in 0.25s ease both;
+    }
+
+    /* Cards staying but moving to a new position — let the FLIP
+      position animation play, cross-fade is handled automatically */
+    ::view-transition-image-pair(*) {
+      isolation: isolate;
+    }
   }
 
   .card-grid {
@@ -185,7 +266,7 @@ const categories = ["all", "layout", "selectors", "animation", "forms", "color"]
     display: grid;
     grid-template-columns: repeat(var(--cols), minmax(0, var(--size-content-1)));
     gap: 1.25rem;
-    padding-block: 12rem;
+    padding-block-end: 12rem;
     place-items: start;
     @media (width >= 720px)  { --cols: 4 }
     @media (width >= 1200px) { --cols: 6 }
@@ -217,15 +298,11 @@ const categories = ["all", "layout", "selectors", "animation", "forms", "color"]
   }
 
   /* ─── :has() filtering ──────────────────────────────────────── */
-  .demo:has(#filter-layout:checked) .card:not([data-category="layout"]) {
-    display: none;
-  }
-
-  .demo:has(#filter-selectors:checked) .card:not([data-category="selectors"]) {
-    display: none;
-  }
-
-  .demo:has(#filter-animation:checked) .card:not([data-category="animation"]) {
+  .demo:has(#filter-layout:checked) .card-animation-layer:has(.card:not([data-category="layout"])),
+  .demo:has(#filter-selectors:checked) .card-animation-layer:has(.card:not([data-category="selectors"])),
+  .demo:has(#filter-animation:checked) .card-animation-layer:has(.card:not([data-category="animation"])),
+  .demo:has(#filter-forms:checked) .card-animation-layer:has(.card:not([data-category="forms"])),
+  .demo:has(#filter-color:checked) .card-animation-layer:has(.card:not([data-category="color"])) {
     display: none;
   }
 

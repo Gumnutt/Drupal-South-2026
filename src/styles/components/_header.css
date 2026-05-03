@@ -9,6 +9,7 @@ header{
   border-bottom: 1px solid var(--light-grey);
   width: 100%;
   padding-block: 1rem;
+  view-transition-name: header;
   .container > *{
     grid-column: feature;
   }
@@ -16,9 +17,12 @@ header{
     --fs-min: 24px;
     --fs-max: 30px;
     margin: 0;
-    font-family: var(--font-mono);
+    font-family: var(--font-display);
     line-height: 1;
     color: var(--dark-grey);
     text-wrap: pretty;
+  }
+  small{
+    view-transition-name: location;
   }
 }

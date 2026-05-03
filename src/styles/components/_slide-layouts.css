@@ -34,10 +34,14 @@
 
 /* Shared label style — small mono uppercase tag */
 .label {
-  font-size: 0.75rem;
+  position: absolute;
+  top: calc(anchor(start) - 0.5lh);
+  left: calc(anchor(start) - 10ch);
+  font-size: clamp(1rem, 1.5vw, 1.15rem);
   font-family: var(--font-display);
   text-transform: uppercase;
   letter-spacing: 0.12em;
+  position-anchor: --title;
 }
 
 /* Supporting note — smaller, subtle */

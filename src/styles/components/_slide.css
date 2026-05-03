@@ -35,6 +35,7 @@
     &:first-of-type {
       margin-top: 0;
       margin-bottom: 0;
+      anchor-name: --title;
     }
   }
 }
@@ -90,5 +91,12 @@ button {
     color: var(--warm-grey);
     fill: currentColor;
     pointer-events: none;
+  }
+}
+
+.code-slide{
+  .label{
+    top: calc(anchor(start) - 0.8lh);
+    left: calc(anchor(start) - 6ch);
   }
 }

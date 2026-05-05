@@ -1,0 +1,25 @@
+---
+interface Props {
+  title?: string
+  subtitle?: string
+}
+const { title, subtitle } = Astro.props
+
+import { Image } from 'astro:assets';
+import headshot from '../images/headshot.png'
+---
+<article class="profile-card">
+  <div class="cutting-mat">
+    <div class="mat-grid">
+      <div class="texture"></div>
+      <p>Make shit look <i>not</i> borked I guess</p>
+    </div>
+  </div>
+  <h1>{title}</h1>
+  <div class="note">
+    <p>A front-end engineer that strives to bridge the gap between web design and development, building user experiences with positive interactivity through thoughtful interfaces. He advocates for modern best practices on the web and loves when CSS animations look just right.</p>
+  </div>
+  <div class="image-wrapper">
+    <Image src={headshot} alt="headshot"/>
+  </div>
+</article>

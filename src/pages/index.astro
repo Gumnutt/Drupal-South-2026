@@ -2,14 +2,16 @@
 import IntroLayout from '../layouts/Layout.astro';
 import IntroNavigation from '../components/IntroNav.astro';
 import Slide from '../components/Slide.astro';
-
+import TitleCard from "../components/TitleCard.astro";
 
 ---
 
-<IntroLayout title="Welcome to Astro." fullscreen="true">
+<IntroLayout title="Welcome to Astro.">
   <Slide>
-    <h1 class="text-sticker">
-      Rethingking the JavaScript Reflex
-    </h1>
+    <div class="entryscreen">
+      <div class="title-slide">
+        <TitleCard title="Rethinking the JavaScript Reflex" subtitle="Brynn Briedis"/>
+      </div>
+    </div>
   </Slide>
 </IntroLayout>

@@ -1,18 +1,27 @@
 import { navigate } from "astro:transitions/client"
 const totalSlides = Object.keys(import.meta.glob("../../slides/*.mdx")).length
 
-function getCurrentSlide() {
-  return parseInt(window.location.pathname.split("/")[1])
+function getCurrentRoute() {
+  const pathname = window.location.pathname
+  console.log("Current pathname:", pathname)
+  if (pathname === "/" || pathname === "") return "root"
+  if (pathname === "/about") return "about"
+  return parseInt(pathname.split("/")[1]) || null
 }
 
 function goNext() {
-  const current = getCurrentSlide()
-  if (current < totalSlides) navigate("/" + (current + 1))
+  const route = getCurrentRoute()
+  if (route === "root") navigate("/about")
+  else if (route === "about") navigate("/1")
+  else if (typeof route === "number" && route < totalSlides) navigate("/" + (route + 1))
 }
 
 function goPrev() {
-  const current = getCurrentSlide()
-  if (current > 1) navigation.back()
+  const route = getCurrentRoute()
+  console.log("Current route:", route)
+  if (route === "about") navigation.back()
+  else if (route === 1) navigate("/about")
+  else if (typeof route === "number" && route > 1) navigation.back()
 }
 
 // Keyboard navigation — registered once, survives page transitions
@@ -36,7 +45,7 @@ document.addEventListener("keydown", (e) => {
 })
 
 document.addEventListener("astro:page-load", () => {
-  const currentSlide = getCurrentSlide()
+  const route = getCurrentRoute()
   const prevBtn = document.getElementById("prevBtn")
   const nextBtn = document.getElementById("nextBtn")
 
@@ -45,17 +54,12 @@ document.addEventListener("astro:page-load", () => {
 
   buttons.forEach((button) => {
     button.addEventListener("click", (ev) => {
-      let href = ev.target.value
-      if (ev.target.id === "prevBtn") {
-        navigation.back()
-      } else {
-        navigate(href)
-      }
+      console.log("Button clicked:", ev.target.id)
+      if (ev.target.id === "prevBtn") goPrev()
+      else goNext()
     })
   })
 
-  nextBtn.style.display = currentSlide === totalSlides ? "none" : ""
-
-  prevBtn.value = "/" + (currentSlide - 1)
-  nextBtn.value = "/" + (currentSlide + 1)
+  prevBtn.style.display = route === "root" ? "none" : ""
+  nextBtn.style.display = route === totalSlides ? "none" : ""
 })

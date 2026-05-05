@@ -4,7 +4,6 @@
 
 html {
   background-color: var(--bg-color);
-  color-scheme: light dark;
 }
 
 :root{
@@ -25,10 +24,11 @@ html {
 .paper-grid{
   --line-weight: 2px;
   --cell-size: 40px;
+  --line-color: oklch(0.86 0.05 219.67 / 0.3);
 
   background-image:
-    linear-gradient(to right, lightblue var(--line-weight), transparent var(--line-weight)),
-    linear-gradient(to bottom, lightblue var(--line-weight), transparent var(--line-weight));
+    linear-gradient(to right, var(--line-color) var(--line-weight), transparent var(--line-weight)),
+    linear-gradient(to bottom, var(--line-color) var(--line-weight), transparent var(--line-weight));
   background-size: var(--cell-size) var(--cell-size);
 }
 
@@ -41,4 +41,12 @@ html {
     linear-gradient(var(--line-color) 2px, transparent 2px),
     linear-gradient(90deg, var(--line-color) 2px, transparent 2px);
   background-size: 30px 30px, 30px 30px, 120px 120px, 120px 120px;
+}
+
+.paper-dots {
+  --dot-color: rgba(0, 0, 0, 0.35);
+  --dot-size: 1px;
+  --tile-size: 20px;
+  background-image: radial-gradient(circle at var(--dot-size) var(--dot-size), rgba(0, 0, 0, 0.35) var(--dot-size), transparent 0);
+  background-size: var(--tile-size) var(--tile-size);
 }

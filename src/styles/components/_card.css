@@ -1,13 +1,19 @@
 .card {
-  --base-padding: 0rem;
-  --content-padding: 1rem;
-
-  --card-padding: calc(e * 2);
-  --card-outer-radius: 16px;
-  --card-inner-radius: calc(var(--card-outer-radius) - var(--card-padding));
-  border: 1px solid #eaeaea;
-  border-radius: var(--card-outer-radius);
-  padding: var(--card-padding);
+  --notch-size: 12px;
+  overflow: hidden;
+  border: 0;
+  border-radius: 15px;
+  padding: 30px 30px 50px;
+  background: var(--beige);
+  text-align: center;
+  color: var(--black);
+  corner-shape: scoop;
+  mask-image: url(./paper-top.png), url(./paper-bottom.png), linear-gradient(#000, #000);
+  mask-position: 50% 0, 50% calc(100% + 15px), 50%;
+  mask-size: auto 16px, auto 30px, 100% 100%;
+  mask-repeat: repeat-x, repeat-x, no-repeat;
+  mask-composite: exclude;
+  mask-mode: alpha;
   container: card / inline-size;
   :has(> img) {
     --card-padding: 3rem;

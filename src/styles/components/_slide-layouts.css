@@ -35,7 +35,7 @@
 /* Shared label style — small mono uppercase tag */
 .label {
   position: absolute;
-  top: calc(anchor(start) - 0.5lh);
+  top: calc(anchor(start));
   left: calc(anchor(start) - 10ch);
   font-size: clamp(1rem, 1.5vw, 1.15rem);
   font-family: var(--font-display);
@@ -46,7 +46,7 @@
 
 /* Supporting note — smaller, subtle */
 .aside {
-  font-size: 0.95rem;
+  font-size: 0.85em;
 }
 
 /* Bold closing question or punchline */

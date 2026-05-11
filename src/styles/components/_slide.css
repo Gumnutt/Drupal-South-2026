@@ -28,8 +28,6 @@
     color: var(--white);
   }
   h1 {
-    --fs-min: 47px;
-    --fs-max: 96px;
     font-family: var(--font-serif);
     color: var(--color-orange);
     &:first-of-type {
@@ -73,7 +71,7 @@
   }
   &:has(.title-slide){
     > div {
-      grid-column: body;
+      grid-column: feature;
     }
   }
   &:has(.profile-slide){
@@ -132,10 +130,5 @@ button {
 }
 
 .reflex-slide{
-  li{
-    &::marker{
-      content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' width='16' height='16'%3E%3Cg fill='none' stroke='currentColor' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolygon points='18,14 82,14 97,44 50,95 3,44'/%3E%3Cline x1='3' y1='44' x2='97' y2='44'/%3E%3Cline x1='18' y1='14' x2='28' y2='44'/%3E%3Cline x1='40' y1='14' x2='28' y2='44'/%3E%3Cline x1='40' y1='14' x2='50' y2='44'/%3E%3Cline x1='60' y1='14' x2='50' y2='44'/%3E%3Cline x1='60' y1='14' x2='72' y2='44'/%3E%3Cline x1='82' y1='14' x2='72' y2='44'/%3E%3Cline x1='28' y1='44' x2='50' y2='95'/%3E%3Cline x1='50' y1='44' x2='50' y2='95'/%3E%3Cline x1='72' y1='44' x2='50' y2='95'/%3E%3C/g%3E%3C/svg%3E");
-      font-size: 16px;
-    }
-  }
+  
 }

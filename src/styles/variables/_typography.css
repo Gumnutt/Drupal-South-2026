@@ -25,7 +25,7 @@
   --astro-code-token-link: #000012;
 }
 
-:where(h1, h2, h3, h4, h5, h6, p, small, .subtitle){
+:where(h1, h2, h3, h4, h5, h6, p, li, small, .subtitle){
   font-size: clamp(var(--fs-min), var(--fs-prefered), var(--fs-max));
   font-family: var(--font-sans);
   font-style: normal;
@@ -34,7 +34,8 @@
 
 h1{
   --fs-min: 36px;
-  --fs-max: 72px;
+  --fs-max: 130px;
+  --fs-prefered: 10vw;
   font-weight: 900;
   letter-spacing: -0.02em;
   line-height: 1.05;
@@ -47,6 +48,12 @@ h2 {
   font-weight: 900;
   letter-spacing: -0.02em;
   line-height: 1.1;
+}
+
+p, li {
+  --fs-min: 2rem;
+  --fs-max: 2rem;
+  --fs-prefered: 3.5vw;
 }
 
 code {

@@ -1,9 +1,15 @@
 .title-card {
+    max-width: max-content;
   h1 {
-    font-family: var(--font-display);
+    --fs-max: 215px;
+    --fs-prefered: 15vw;
+    font-family: var(--font-serif);
     color: var(--color-orange);
   }
   .subtitle{
-    translate: 110% -46%;
+    position: absolute;
+    bottom: calc(anchor(end) - 15px);
+    right: calc(anchor(right) + 2ch);
+    position-anchor: --title;
   }
 }

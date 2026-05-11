@@ -1,0 +1,12 @@
+---
+interface Props {
+  image?: ImageMetadata
+}
+const { image } = Astro.props
+
+import { Image } from 'astro:assets';
+---
+
+<div class="polaroid">
+  <Image src={image} alt="polaroid image"/>
+</div>

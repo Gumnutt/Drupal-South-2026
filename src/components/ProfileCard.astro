@@ -7,6 +7,9 @@ const { title, subtitle } = Astro.props
 
 import { Image } from 'astro:assets';
 import headshot from '../images/headshot.png'
+import fam from '../images/fam.jpeg'
+import Logo from '../images/pragma.svg';
+import Polaroid from './Polaroid.astro';
 ---
 <article class="profile-card">
   <div class="cutting-mat">
@@ -22,4 +25,6 @@ import headshot from '../images/headshot.png'
   <div class="image-wrapper">
     <Image src={headshot} alt="headshot"/>
   </div>
+  <Polaroid image={fam} />
+  <Logo />
 </article>

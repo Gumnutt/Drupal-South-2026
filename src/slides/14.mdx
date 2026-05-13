@@ -1,44 +1,33 @@
 ---
-id: "14"
-title: "Anchor Positioning: The Problem"
+id: "15"
+title: "Anchor Positioning: The Solution"
 ---
 
 <div class="code-slide">
   <div class="code-slide__header">
-    <p class="label masking-tape">The problem</p>
-    <h1>A popover that follows its trigger.</h1>
-    <p>You've either reached for Popper.js, floating-ui, or written something like this.</p>
+    <p class="label masking-tape">The solution</p>
+    <h1>No Popper. No floating-ui. Just CSS.</h1>
+    <p>Name the anchor, attach the popover, tell it where to sit.</p>
   </div>
-  <div class="code-slide__code">
+  <div class="code-slide__code paper-dots">
 
-```javascript
-import { createPopper } from '@popperjs/core'
+```css
+.card-info-btn {
+  anchor-name: --card-anchor;
+}
 
-const trigger = document.querySelector('.card-info-btn')
-const popover = document.querySelector('.card-popover')
+.card-popover {
+  position: absolute;
+  position-anchor: --card-anchor;
+  position-area: top center;
+  margin-bottom: 0.5rem;
 
-const popper = createPopper(trigger, popover, {
-  placement: 'top',
-  modifiers: [
-    {
-      name: 'offset',
-      options: { offset: [0, 8] },
-    },
-    {
-      name: 'preventOverflow',
-      options: { boundary: 'viewport' },
-    },
-  ],
-})
-
-trigger.addEventListener('mouseenter', () => {
-  popover.setAttribute('data-show', '')
-  popper.update()
-})
-trigger.addEventListener('mouseleave', () => {
-  popover.removeAttribute('data-show')
-})
+  /* Fallback if it doesn't fit above */
+  position-try-fallbacks: flip-block;
+}
 ```
 
   </div>
 </div>
+
+{/* Demo: <CardGridStage5 /> */}

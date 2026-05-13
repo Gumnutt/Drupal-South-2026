@@ -1,39 +1,38 @@
 ---
-id: "12"
-title: "View Transitions: The Problem"
+id: "13"
+title: "View Transitions: The Solution"
 ---
 
 <div class="code-slide">
   <div class="code-slide__header">
-    <p class="label masking-tape">The problem</p>
-    <h1>A card that expands to a detail view.</h1>
-    <p>The kind of thing that used to need a framework — or a lot of this.</p>
+    <p class="label masking-tape">The solution</p>
+    <h1>Name the element. The browser figures out the rest.</h1>
+    <p>Give the card and its detail view the same <code>view-transition-name</code>. That's it.</p>
   </div>
-  <div class="code-slide__code">
+  <div class="code-slide__code paper-dots">
 
-```javascript
-card.addEventListener('click', () => {
-  const rect = card.getBoundingClientRect()
-  const clone = card.cloneNode(true)
+```css
+/* On the card */
+.card {
+  view-transition-name: var(--card-id);
+}
 
-  clone.style.position = 'fixed'
-  clone.style.top = rect.top + 'px'
-  clone.style.left = rect.left + 'px'
-  clone.style.width = rect.width + 'px'
-  clone.style.height = rect.height + 'px'
+/* On the detail page */
+.card-detail {
+  view-transition-name: var(--card-id);
+}
 
-  document.body.appendChild(clone)
+/* Optional: customise the transition */
+::view-transition-old(root) {
+  animation: slide-out 0.3s ease both;
+}
 
-  requestAnimationFrame(() => {
-    clone.style.transition = 'all 0.4s ease'
-    clone.style.top = '0'
-    clone.style.left = '0'
-    clone.style.width = '100vw'
-    clone.style.height = '100vh'
-    // ... and it only gets worse from here
-  })
-})
+::view-transition-new(root) {
+  animation: slide-in 0.3s ease both;
+}
 ```
 
   </div>
 </div>
+
+{/* Demo: <CardGridStage4 /> */}

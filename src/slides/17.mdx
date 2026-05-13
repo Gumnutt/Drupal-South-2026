@@ -1,33 +1,13 @@
 ---
-id: "17"
-title: "@starting-style: The Solution"
+id: "18"
+title: "The Finished Component"
 ---
 
-<div class="code-slide">
-  <div class="code-slide__header">
-    <p class="label masking-tape">The solution</p>
-    <h1>Give it a before-state to transition from.</h1>
-    <p><code>@starting-style</code> defines where an element starts when it first enters the DOM.</p>
-  </div>
-  <div class="code-slide__code">
-
-```css
-.card-popover {
-  opacity: 1;
-  translate: 0 0;
-  transition: opacity 0.2s, translate 0.2s,
-    display 0.2s allow-discrete;
-}
-
-@starting-style {
-  .card-popover {
-    opacity: 0;
-    translate: 0 0.5rem;
-  }
-}
-```
-
+<div class="entryscreen">
+  <div class="content-slide single-column">
+    <p class="label masking-tape">Putting it all together</p>
+    <h1>Container queries. :has(). Scroll animations. View transitions. Anchor positioning. @starting-style.</h1>
   </div>
 </div>
 
-{/* Demo: <CardGridFinal /> */}
+{/* Replace with <CardGridFinal /> — open DevTools Event Listeners panel live */}

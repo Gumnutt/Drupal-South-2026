@@ -52,6 +52,7 @@
     z-index: -2;
     rotate: 7deg;
     width: 160px;
+    color: var(--bg-color);
     inset-block-end: calc(anchor(end) + 3rem);
     inset-inline-start: calc(anchor(start) + 3rem);
     position-anchor: --cutting-mat;

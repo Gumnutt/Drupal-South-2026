@@ -44,9 +44,10 @@ html {
 }
 
 .paper-dots {
-  --dot-color: rgba(0, 0, 0, 0.35);
+  --dot-color: rgb(255 255 255 / 10%);
   --dot-size: 1px;
   --tile-size: 20px;
-  background-image: radial-gradient(circle at var(--dot-size) var(--dot-size), rgba(0, 0, 0, 0.35) var(--dot-size), transparent 0);
+  background-image: radial-gradient(circle at var(--dot-size) var(--dot-size), var(--dot-color) var(--dot-size), transparent 0);
+  background-position: 10px 10px;
   background-size: var(--tile-size) var(--tile-size);
 }

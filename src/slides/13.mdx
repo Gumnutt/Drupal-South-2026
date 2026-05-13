@@ -1,38 +1,44 @@
 ---
-id: "13"
-title: "View Transitions: The Solution"
+id: "14"
+title: "Anchor Positioning: The Problem"
 ---
 
 <div class="code-slide">
   <div class="code-slide__header">
-    <p class="label masking-tape">The solution</p>
-    <h1>Name the element. The browser figures out the rest.</h1>
-    <p>Give the card and its detail view the same <code>view-transition-name</code>. That's it.</p>
+    <p class="label masking-tape">The problem</p>
+    <h1>A popover that follows its trigger.</h1>
+    <p>You've either reached for Popper.js, floating-ui, or written something like this.</p>
   </div>
-  <div class="code-slide__code">
+  <div class="code-slide__code paper-dots">
 
-```css
-/* On the card */
-.card {
-  view-transition-name: var(--card-id);
-}
+```javascript
+import { createPopper } from '@popperjs/core'
 
-/* On the detail page */
-.card-detail {
-  view-transition-name: var(--card-id);
-}
+const trigger = document.querySelector('.card-info-btn')
+const popover = document.querySelector('.card-popover')
 
-/* Optional: customise the transition */
-::view-transition-old(root) {
-  animation: slide-out 0.3s ease both;
-}
+const popper = createPopper(trigger, popover, {
+  placement: 'top',
+  modifiers: [
+    {
+      name: 'offset',
+      options: { offset: [0, 8] },
+    },
+    {
+      name: 'preventOverflow',
+      options: { boundary: 'viewport' },
+    },
+  ],
+})
 
-::view-transition-new(root) {
-  animation: slide-in 0.3s ease both;
-}
+trigger.addEventListener('mouseenter', () => {
+  popover.setAttribute('data-show', '')
+  popper.update()
+})
+trigger.addEventListener('mouseleave', () => {
+  popover.removeAttribute('data-show')
+})
 ```
 
   </div>
 </div>
-
-{/* Demo: <CardGridStage4 /> */}

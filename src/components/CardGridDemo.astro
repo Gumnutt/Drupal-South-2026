@@ -107,7 +107,6 @@ const shuffled = [...features].sort(() => Math.random() - 0.5)
       {shuffled.map(f => (
         <div class="card-animation-layer" style={`view-transition-name: card-${f.id}`}>
           <article class="card" data-category={f.category}>
-            <span class="card-emoji">{f.emoji}</span>
             <h3 class="card-title">{f.title}</h3>
             <p class="card-desc">{f.desc}</p>
             <div class="card-footer">
@@ -241,10 +240,19 @@ const shuffled = [...features].sort(() => Math.random() - 0.5)
     color: var(--bg-color);
   }
 
+  @position-try --custom-bottom {
+    top: anchor(bottom);
+    bottom: unset;
+    margin-top: 10px;
+  }
+
   /* ─── Card grid — container ─────────────────────────────────── */
   .card-grid-container {
     container-type: inline-size;
     container-name: demo-grid;
+    max-width: 1120px;
+    width: 100%;
+    margin-inline: auto;
     ::view-transition-old(*) {
       animation: vt-card-out 0.2s ease both;
     }
@@ -420,16 +428,15 @@ const shuffled = [...features].sort(() => Math.random() - 0.5)
   .card-popover {
     /* Anchor positioning — tethered to its trigger button */
     position: fixed;
-    position-area: top center;
-    margin: 0.5rem;
-    width: 220px;
+    position-area: center left;
+    position-try: right, left, bottom, top;
 
+    width: 450px;
+    margin: 0.5rem;
     border: var(--border-thick);
     border-radius: var(--border-radius-sticker);
     padding: 1rem;
-    background: var(--color-yellow);
     color: var(--color-navy);
-    font-size: 0.8rem;
     line-height: 1.5;
 
     /* Entrance/exit transitions with @starting-style */
@@ -442,6 +449,10 @@ const shuffled = [...features].sort(() => Math.random() - 0.5)
       scale 0.2s ease,
       display 0.2s allow-discrete,
       overlay 0.2s allow-discrete;
+    p {
+      --fs-min: 1rem;
+      --fs-max: 1.125rem;
+    }
   }
 
   .card-popover:not(:popover-open) {

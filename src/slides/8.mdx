@@ -1,36 +1,34 @@
 ---
-id: "8"
-title: ":has() — The Problem"
+id: "9"
+title: ":has() — The Solution"
 ---
 
 <div class="code-slide">
   <div class="code-slide__header">
-    <p class="label masking-tape">The problem</p>
-    <h1>Filtering without a page reload.</h1>
-    <p>A click handler for every filter, a loop over every card, classList juggling.</p>
+    <p class="label masking-tape">The solution</p>
+    <h1>CSS as a state machine.</h1>
+    <p>The grid reacts to its own contents. No event listeners. No class toggling.</p>
   </div>
-  <div class="code-slide__code">
+  <div class="code-slide__code paper-dots">
 
-```javascript
-const filters = document.querySelectorAll('.filter-btn')
-const cards = document.querySelectorAll('.card')
+```css
+/* Hidden radio buttons drive the state */
+.card-grid:has(#filter-design:checked)
+  .card:not([data-category="design"]) {
+  opacity: 0.3;
+  scale: 0.95;
+  pointer-events: none;
+}
 
-filters.forEach(filter => {
-  filter.addEventListener('click', () => {
-    const category = filter.dataset.category
-
-    filters.forEach(f => f.classList.remove('active'))
-    filter.classList.add('active')
-
-    cards.forEach(card => {
-      const match = category === 'all'
-        || card.dataset.category === category
-
-      card.classList.toggle('hidden', !match)
-    })
-  })
-})
+.card-grid:has(#filter-dev:checked)
+  .card:not([data-category="dev"]) {
+  opacity: 0.3;
+  scale: 0.95;
+  pointer-events: none;
+}
 ```
 
   </div>
 </div>
+
+{/* Demo: <CardGridStage2 /> */}

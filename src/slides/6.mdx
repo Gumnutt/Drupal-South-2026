@@ -1,34 +1,34 @@
 ---
-id: "6"
-title: "Container Queries: The Problem"
+id: "7"
+title: "Container Queries: The Solution"
 ---
 
 <div class="code-slide">
   <div class="code-slide__header">
-    <p class="label masking-tape">The problem</p>
-    <h1>Cards that reflow based on their container.</h1>
-    <p>The old way: watch every card with a <code>ResizeObserver</code>.</p>
+    <p class="label masking-tape">The solution</p>
+    <h1>The card knows where it lives.</h1>
+    <p>Name the container. Query it in CSS. Done.</p>
   </div>
-  <div class="code-slide__code">
+  <div class="code-slide__code paper-dots">
 
-```javascript
-const cards = document.querySelectorAll('.card')
+```css
+.card-grid {
+  container-type: inline-size;
+  container-name: grid;
+}
 
-const observer = new ResizeObserver(entries => {
-  for (const entry of entries) {
-    const width = entry.contentRect.width
-
-    if (width < 300) {
-      entry.target.classList.add('card--compact')
-      entry.target.classList.remove('card--full')
-    } else {
-      entry.target.classList.add('card--full')
-      entry.target.classList.remove('card--compact')
-    }
+@container grid (width < 400px) {
+  .card {
+    flex-direction: column;
+    font-size: 0.875rem;
   }
-})
+}
 
-cards.forEach(card => observer.observe(card))
+@container grid (width >= 600px) {
+  .card {
+    grid-template-columns: auto 1fr;
+  }
+}
 ```
 
   </div>

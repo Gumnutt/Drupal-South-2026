@@ -1,33 +1,37 @@
 ---
-id: "15"
-title: "Anchor Positioning: The Solution"
+id: "16"
+title: "@starting-style: The Problem"
 ---
 
 <div class="code-slide">
   <div class="code-slide__header">
-    <p class="label masking-tape">The solution</p>
-    <h1>No Popper. No floating-ui. Just CSS.</h1>
-    <p>Name the anchor, attach the popover, tell it where to sit.</p>
+    <p class="label masking-tape">The problem</p>
+    <h1>The popover appears but just snaps in.</h1>
+    <p>To animate from <code>display: none</code>, you need the JS timing dance.</p>
   </div>
-  <div class="code-slide__code">
+  <div class="code-slide__code paper-dots">
 
-```css
-.card-info-btn {
-  anchor-name: --card-anchor;
+```javascript
+function showPopover(el) {
+  el.style.display = 'block'
+
+  // Force a reflow so the browser registers
+  // the element before transitioning
+  el.getBoundingClientRect()
+
+  requestAnimationFrame(() => {
+    el.classList.add('is-visible')
+  })
 }
 
-.card-popover {
-  position: absolute;
-  position-anchor: --card-anchor;
-  position-area: top center;
-  margin-bottom: 0.5rem;
+function hidePopover(el) {
+  el.classList.remove('is-visible')
 
-  /* Fallback if it doesn't fit above */
-  position-try-fallbacks: flip-block;
+  el.addEventListener('transitionend', () => {
+    el.style.display = 'none'
+  }, { once: true })
 }
 ```
 
   </div>
 </div>
-
-{/* Demo: <CardGridStage5 /> */}

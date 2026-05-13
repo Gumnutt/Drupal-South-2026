@@ -1,13 +1,20 @@
 ---
-id: "19"
-title: "The Meta Moment"
-fullscreen: true
-background: blue
+id: "20"
+title: "When to Still Use JavaScript"
 ---
-import CardGridDemo from '../components/CardGridDemo.astro'                                                                                                                                                                                   
 
-<div class="entryscreen demo">
-  <CardGridDemo />
+<div class="entryscreen">
+  <div class="content-slide">
+    <p class="label masking-tape">The honest slide</p>
+    <h1>Some things still need JavaScript.</h1>
+    <ul>
+      <li>Server communication and data fetching</li>
+      <li>Complex state shared across distant components</li>
+      <li>Drag and drop interactions</li>
+      <li>Canvas, WebGL, audio</li>
+      <li>Focus management in complex widgets</li>
+      <li>Anything that needs to know what happened before</li>
+    </ul>
+    <p class="aside">The goal was never to remove JavaScript. It was to stop reaching for it automatically.</p>
+  </div>
 </div>
-
-{/* Open DevTools live and show: view transitions on nav, scroll-driven progress bar, anchor-positioned speaker notes */}

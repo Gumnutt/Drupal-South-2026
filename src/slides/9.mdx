@@ -1,34 +1,33 @@
 ---
-id: "9"
-title: ":has() — The Solution"
+id: "10"
+title: "Scroll-Driven Animations: The Problem"
 ---
 
 <div class="code-slide">
   <div class="code-slide__header">
-    <p class="label masking-tape">The solution</p>
-    <h1>CSS as a state machine.</h1>
-    <p>The grid reacts to its own contents. No event listeners. No class toggling.</p>
+    <p class="label masking-tape">The problem</p>
+    <h1>Animating cards as they enter the viewport.</h1>
+    <p>You've written this. We all have.</p>
   </div>
-  <div class="code-slide__code">
+  <div class="code-slide__code paper-dots">
 
-```css
-/* Hidden radio buttons drive the state */
-.card-grid:has(#filter-design:checked)
-  .card:not([data-category="design"]) {
-  opacity: 0.3;
-  scale: 0.95;
-  pointer-events: none;
-}
+```javascript
+const cards = document.querySelectorAll('.card')
 
-.card-grid:has(#filter-dev:checked)
-  .card:not([data-category="dev"]) {
-  opacity: 0.3;
-  scale: 0.95;
-  pointer-events: none;
-}
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible')
+      observer.unobserve(entry.target)
+    }
+  })
+}, {
+  threshold: 0.2,
+  rootMargin: '0px 0px -50px 0px'
+})
+
+cards.forEach(card => observer.observe(card))
 ```
 
   </div>
 </div>
-
-{/* Demo: <CardGridStage2 /> */}

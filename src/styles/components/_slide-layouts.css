@@ -64,7 +64,7 @@
    ============================================ */
 .content-slide {
   display: grid;
-  align-content: center;
+  align-items: center;
   gap: 1.5rem;
   grid-template-columns: 
     [title-start] 1fr
@@ -78,6 +78,9 @@
   h1, h2, p, ul {
     margin: 0;
   }
+  &.single-column {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ============================================
@@ -88,7 +91,7 @@
   align-items: center;
   min-height: var(--display-height);
   padding: 3rem 4rem;
-  grid-template-columns: 1fr 1.4fr;
+  grid-template-columns: 1.6fr 1fr;
   gap: 4rem;
   grid-column: feature;
 }
@@ -117,28 +120,17 @@
   --code-block-padding: 1rem;
   position: relative;
   margin-top: var(--code-spacer);
-  &:before{
-    content: "";
-    position: absolute;
-    z-index: -1;
-    left: 0;
-    bottom: 100%;
-    box-shadow: var(--shadow-sticker-lg);
-    border-radius: 16px 16px 0 0;
-    width: 100%;
-    height: var(--code-spacer);
-    background-color: #1f3241;
-    background-image: radial-gradient(hsl(18 100% 50%) 50%, transparent 51%), radial-gradient(hsl(39, 100%, 62%) 50%, transparent 51%), radial-gradient(hsl(136, 74%, 44%) 50%, transparent 51%);
-    background-repeat: no-repeat;
-    background-position: 0.5rem 50%, 1.5rem 50%, 2.5rem 50%;
-    background-size: 1rem 1rem;
-  }
+  padding: 2rem;
+  background-color: var(--dark-grey);
+  corner-shape: scoop;
+  mask-image: url(./paper-top.png), url(./paper-bottom.png), linear-gradient(#000, #000);
+  mask-position: 50% 0, 50% calc(100% + 15px), 50%;
+  mask-size: auto 16px, auto 30px, 100% 100%;
+  mask-repeat: repeat-x, repeat-x, no-repeat;
+  mask-composite: exclude;
+  mask-mode: alpha;
   pre {
-    --astro-code-background: var(--bg-color, white);
-    box-shadow: var(--shadow-sticker-lg);
-    border: var(--border-thick);
-    border-radius: 0 0 var(--border-radius-sticker) var(--border-radius-sticker);
-    font-size: clamp(0.75rem, 1.2vw, 0.9rem) !important;
+    border: none;
     grid-column: unset !important;
   }
   code{

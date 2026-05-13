@@ -1,37 +1,33 @@
 ---
-id: "16"
-title: "@starting-style: The Problem"
+id: "17"
+title: "@starting-style: The Solution"
 ---
 
 <div class="code-slide">
   <div class="code-slide__header">
-    <p class="label masking-tape">The problem</p>
-    <h1>The popover appears but just snaps in.</h1>
-    <p>To animate from <code>display: none</code>, you need the JS timing dance.</p>
+    <p class="label masking-tape">The solution</p>
+    <h1>Give it a before-state to transition from.</h1>
+    <p><code>@starting-style</code> defines where an element starts when it first enters the DOM.</p>
   </div>
-  <div class="code-slide__code">
+  <div class="code-slide__code paper-dots">
 
-```javascript
-function showPopover(el) {
-  el.style.display = 'block'
-
-  // Force a reflow so the browser registers
-  // the element before transitioning
-  el.getBoundingClientRect()
-
-  requestAnimationFrame(() => {
-    el.classList.add('is-visible')
-  })
+```css
+.card-popover {
+  opacity: 1;
+  translate: 0 0;
+  transition: opacity 0.2s, translate 0.2s,
+    display 0.2s allow-discrete;
 }
 
-function hidePopover(el) {
-  el.classList.remove('is-visible')
-
-  el.addEventListener('transitionend', () => {
-    el.style.display = 'none'
-  }, { once: true })
+@starting-style {
+  .card-popover {
+    opacity: 0;
+    translate: 0 0.5rem;
+  }
 }
 ```
 
   </div>
 </div>
+
+{/* Demo: <CardGridFinal /> */}

@@ -6,13 +6,13 @@
   font-size: var(--font-size);
   line-height: var(--line-height);
   grid-template-columns:
-    [full-bleed-start] 6rem
+    [full-bleed-start] 7rem
     [feature-start] minmax(0, 1fr)
     [breakout-start] minmax(0, calc(var(--rhythm) * 1))
     [body-start] minmax(0, 54ch)
     [body-end] minmax(0, calc(var(--rhythm) * 1))
     [breakout-end] minmax(0, 1fr)
-    [feature-end] 6rem [full-bleed-end];
+    [feature-end] 7rem [full-bleed-end];
   pre {
     grid-column: breakout-start/breakout-end;
   }
